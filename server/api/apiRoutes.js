@@ -4,7 +4,7 @@ const router = express.Router();
 
 // Routes
 const projects = require("./projects");
-const user = require("./usr");
+const user = require("./user");
 
 // /api
 router.get("/", (req, res) => {
