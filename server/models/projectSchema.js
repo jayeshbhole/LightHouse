@@ -28,7 +28,7 @@ const card = new Schema({
 });
 
 const projectSchema = new Schema({
-  // user: userSchema,
+  user: [userSchema.schema],
   projectName: {
     type: String,
     required: true,

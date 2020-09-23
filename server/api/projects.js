@@ -42,4 +42,39 @@ router.get("/:projectId", async (req, res) => {
   res.send(JSON.stringify(proj, null, 2));
 });
 
+// Project Cards
+
+router.post("/:projId", async (req, res) => {
+  const card = req.body;
+
+  const proj = await Project.findById(req.params.projId);
+  proj.cards = [...proj.cards, card];
+  proj
+    .save()
+    .then((data) =>
+      res.json({
+        message: "posted card successfully",
+        data: data,
+      })
+    )
+    .catch((err) =>
+      res.status(400).json({
+        error: err,
+        message: "Error creating card",
+      })
+    );
+});
+
+router.patch("/:projId/:cardId", async (req, res) => {
+  const data = req.body;
+  const card = {
+    title: data.title,
+    priority: data.priority,
+    description: data.description,
+    deadline: data.deadline,
+    status: data.status,
+    nextTasks: data.nextTasks,
+  };
+});
+
 module.exports = router;
