@@ -16,6 +16,7 @@ const userSchema = new Schema({
   },
   git_token: {
     type: String,
+    required: true,
   },
   projects: {
     type: Array,
@@ -36,4 +37,4 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model("Users", userSchema, "users");
+module.exports = mongoose.model("User", userSchema, "User");

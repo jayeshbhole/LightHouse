@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const userSchema = require("./userSchema");
 
 const card = new Schema({
   title: {
@@ -28,7 +27,18 @@ const card = new Schema({
 });
 
 const projectSchema = new Schema({
-  // user: userSchema,
+  user: {
+    type: Object,
+    username: {
+      type: String,
+      required: true,
+    },
+    git_id: {
+      type: String,
+      required: true,
+    },
+    _id: String,
+  },
   projectName: {
     type: String,
     required: true,
@@ -36,4 +46,4 @@ const projectSchema = new Schema({
   cards: [card],
 });
 
-module.exports = mongoose.model("Project", projectSchema, "projects");
+module.exports = mongoose.model("Project", projectSchema, "Project");
