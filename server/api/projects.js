@@ -4,10 +4,8 @@ const router = express.Router();
 
 const { Project, Card } = require("../models/projectSchema.js");
 const User = require("../models/userSchema");
-const mongoose = require("mongoose");
-// Routes
 
-// Projects
+// All Projects [Only for Debugging]
 router.get("/all", async (req, res) => {
   id = req.body.git_id;
   try {
@@ -15,10 +13,11 @@ router.get("/all", async (req, res) => {
     res.header("Content-Type", "application/json");
     res.send(JSON.stringify(proj, null, 2));
   } catch (error) {
-    res.json({ message: error });
+    res.send({ message: error });
   }
 });
 
+// Project by ID
 router.get("/:projectId", async (req, res) => {
   try {
     const proj = await Project.findById(req.params.projectId);
@@ -30,7 +29,26 @@ router.get("/:projectId", async (req, res) => {
   }
 });
 
-// all projects of a user
+// Delete Project
+router.delete("/:projectId", async (req, res) => {
+  try {
+    res.header("Content-Type", "application/json");
+    await Project.deleteOne({ _id: req.params.projectId }, function (err) {
+      if (err) {
+        console.log(err);
+        res.send({ message: "Error", error: err });
+        return;
+      }
+      console.log("Successful deletion");
+      res.send({ message: "Successfully deleted the project." });
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(400).send({ message: error });
+  }
+});
+
+// Projects of User
 router.get("/u/:userId", async (req, res) => {
   try {
     const projs = await Project.find({ "user._id": req.params.userId });
@@ -71,8 +89,8 @@ router.post("/", async (req, res) => {
     );
 });
 
-// cards of a project
-
+// Cards API
+// Project Cards
 router.get("/c/:projectId", async (req, res) => {
   try {
     const proj = await Project.findById(req.params.projectId);
@@ -84,6 +102,7 @@ router.get("/c/:projectId", async (req, res) => {
   }
 });
 
+// Create Card
 router.post("/c/:projectId", async (req, res) => {
   try {
     const card = new Card(req.body);
@@ -107,9 +126,10 @@ router.post("/c/:projectId", async (req, res) => {
   }
 });
 
-router.put("/c/:projectId", async (req, res) => {
+// Update Card
+router.put("/c/:projectId/:cardId", async (req, res) => {
   try {
-    Project.find({ "": req.params.cardId })
+    Project.findById(req.params.projectId)
       .then((project) => {
         const card = project.cards.id(req.params.cardId);
         card.set(req.body);
@@ -119,6 +139,27 @@ router.put("/c/:projectId", async (req, res) => {
         res.header("Content-Type", "application/json");
         res.send(JSON.stringify(project), null, 2);
       });
+  } catch (error) {
+    res.status(400).send({ message: error });
+  }
+});
+
+// Delete Card
+router.delete("/c/:projectId/:cardId", async (req, res) => {
+  try {
+    res.header("Content-Type", "application/json");
+    Project.findByIdAndUpdate(
+      { _id: req.params.projectId },
+      { $pull: { cards: { _id: req.params.cardId } } },
+      function (err, doc) {
+        if (err) {
+          console.log(err);
+          res.send({ message: "Error", error: err });
+          return;
+        }
+        res.send(JSON.stringify(doc), null, 2);
+      }
+    );
   } catch (error) {
     res.status(400).send({ message: error });
   }
