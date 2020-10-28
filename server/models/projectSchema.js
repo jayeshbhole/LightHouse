@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const card = new Schema({
+const cardSchema = new Schema({
   title: {
     type: String,
     minLength: 1,
@@ -17,13 +17,6 @@ const card = new Schema({
   },
   deadline: Date,
   status: String,
-  nextTasks: {
-    type: Array,
-    task: {
-      type: Object,
-      task_id: String,
-    },
-  },
 });
 
 const projectSchema = new Schema({
@@ -37,13 +30,17 @@ const projectSchema = new Schema({
       type: String,
       required: true,
     },
-    _id: String,
+    _id: {
+      type: String,
+      required: true,
+    },
   },
   projectName: {
     type: String,
     required: true,
   },
-  cards: [card],
+  cards: [cardSchema],
 });
-
-module.exports = mongoose.model("Project", projectSchema, "Project");
+Project = mongoose.model("Project", projectSchema, "Project");
+Card = mongoose.model("Card", cardSchema);
+module.exports = { Project, Card };
