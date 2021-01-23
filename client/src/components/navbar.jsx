@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
+import Button from "react-bulma-components/lib/components/button";
 class Navigation extends Component {
 	constructor(props) {
 		super(props);
@@ -25,21 +26,26 @@ class Navigation extends Component {
 							Mind Map
 						</NavLink>
 					</li>
-					{this.props.user ? (
-						<button onClick={() => this.props.auth.signOut()}>
-							Log Out
-						</button>
-					) : (
-						<li className="login">
-							<NavLink className="--item" to="/login">
-								Login
-							</NavLink>
-							<img
-								src={require("../assets/img/login.svg")}
-								alt=""
-							/>
-						</li>
-					)}
+					<li className="login">
+						{this.props.user ? (
+							<Button
+								color="danger"
+								onClick={() => this.props.auth.signOut()}
+							>
+								Log Out
+							</Button>
+						) : (
+							<React.Fragment>
+								<NavLink className="--item" to="/login">
+									Login
+								</NavLink>
+								<img
+									src={require("../assets/img/login.svg")}
+									alt=""
+								/>
+							</React.Fragment>
+						)}
+					</li>
 				</ul>
 			</nav>
 		);

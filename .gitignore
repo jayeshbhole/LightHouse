@@ -8,6 +8,9 @@
 /.pnp
 .pnp.js
 .env
+.eslintcache
+./client/public/env.js
+
 # testing
 /coverage
 

@@ -10,6 +10,7 @@
 		"firebase": "^8.2.0",
 		"node-sass": "^4.14.1",
 		"react": "^16.14.0",
+		"react-bulma-components": "^3.4.0",
 		"react-dom": "^16.13.1",
 		"react-dotenv": "^0.1.3",
 		"react-firebase-hooks": "^2.2.0",
@@ -36,6 +37,17 @@
 			"last 1 chrome version",
 			"last 1 firefox version",
 			"last 1 safari version"
+		]
+	},
+	"react-dotenv": {
+		"whitelist": [
+			"API_KEY",
+			"AUTH_DOMAIN",
+			"PROJECT_ID",
+			"STORAGE_BUCKET",
+			"M_SENDER_ID",
+			"APPID",
+			"M_ID"
 		]
 	}
 }
