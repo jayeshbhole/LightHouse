@@ -1,35 +1,25 @@
 import React from "react";
-import "./assets/scss/App.scss";
+import "./assets/scss/app.scss";
 import firebase, { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Landing from "./components/landing.jsx";
-import Navigation from "./components/navbar";
+import Navigation from "./components/navbar2";
 import Login from "./components/login";
 
 function App() {
 	const [user] = useAuthState(auth);
 	return (
-		<div className="App">
+		<div className="app">
 			<BrowserRouter>
 				<Navigation user={user} auth={auth} />
-				Hi
+				<br />
+				<br />
 				<Switch>
 					{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 					<Route exact path="/kanban"></Route>
-					<Route
-						exact
-						path="/login"
-						component={() => (
-							<Login
-								user={user}
-								firebase={firebase}
-								auth={auth}
-							/>
-						)}
-					></Route>
-					<Route path="" component={() => "Hi"} />
+					<Route exact path="/login" component={() => <Login user={user} firebase={firebase} auth={auth} />}></Route>
 				</Switch>
 			</BrowserRouter>
 		</div>

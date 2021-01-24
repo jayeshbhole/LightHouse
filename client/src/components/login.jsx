@@ -1,17 +1,14 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Button from "react-bulma-components/lib/components/button";
+import Card from "react-bulma-components/lib/components/card";
+import "../assets/scss/login.scss";
 
 const Login = ({ user, firebase, auth }) => {
 	return !!user ? (
-		<Redirect path="/loggedin" />
+		<Redirect path="/" />
 	) : (
-		<div>
-			<br />
-			<br />
-			<br />
-			<br />
-			<br />
+		<Card>
 			<Button
 				color="primary"
 				onClick={() => {
@@ -19,9 +16,18 @@ const Login = ({ user, firebase, auth }) => {
 					auth.signInWithPopup(provider);
 				}}
 			>
-				Login
+				Login With Google
 			</Button>
-		</div>
+			<Button
+				className="is-dark"
+				onClick={() => {
+					const provider2 = new firebase.auth.GithubAuthProvider();
+					auth.signInWithPopup(provider2);
+				}}
+			>
+				Login With GitHub
+			</Button>
+		</Card>
 	);
 };
 
