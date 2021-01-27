@@ -8,14 +8,13 @@ const Login = ({ user, firebase, auth }) => {
 	return !!user ? (
 		<Redirect path="/" />
 	) : (
-		<Card>
+		<Card className="login-card">
 			<Button
 				color="primary"
 				onClick={() => {
 					const provider = new firebase.auth.GoogleAuthProvider();
 					auth.signInWithPopup(provider);
-				}}
-			>
+				}}>
 				Login With Google
 			</Button>
 			<Button
@@ -23,8 +22,7 @@ const Login = ({ user, firebase, auth }) => {
 				onClick={() => {
 					const provider2 = new firebase.auth.GithubAuthProvider();
 					auth.signInWithPopup(provider2);
-				}}
-			>
+				}}>
 				Login With GitHub
 			</Button>
 		</Card>

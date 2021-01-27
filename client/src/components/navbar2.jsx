@@ -29,6 +29,11 @@ const Navigation = ({ user, auth }) => {
 						<Navbar.Item>
 							<NavLink to="/mindmap">Mind Map</NavLink>
 						</Navbar.Item>
+						{user ? (
+							<Navbar.Item>
+								<NavLink to="/projects">Projects</NavLink>
+							</Navbar.Item>
+						) : null}
 					</Navbar.Container>
 					<Navbar.Container position="end">
 						<Navbar.Item>
