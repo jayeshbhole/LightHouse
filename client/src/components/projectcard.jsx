@@ -4,15 +4,12 @@ import Dropdown from "react-bulma-components/lib/components/dropdown";
 import "../assets/scss/projectcard.scss";
 
 const ProjectCard = ({ project }) => {
-	const [drop, setDrop] = React.useState(false);
 	return (
 		<Card className="projectcard">
 			<Card.Content>
 				<div class="is-flex">
 					<div className="title is-3">{project.name}</div>
 					<Dropdown
-						value={drop}
-						onChange={() => setDrop(!drop)}
 						label={
 							<span class="icon is-big">
 								<i class="rbc rbc-bars"></i>
