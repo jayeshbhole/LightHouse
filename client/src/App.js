@@ -1,5 +1,5 @@
 import React from "react";
-import "./assets/scss/app.scss";
+import "./assets/scss/App.scss";
 import firebase, { auth, db } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -13,7 +13,7 @@ function App() {
 	const [user] = useAuthState(auth);
 	const [userdata, setUserData] = React.useState();
 	if (user && !userdata) {
-		db.doc("users/" + user.uid).onSnapshot(doc => {
+		db.doc("users/" + user.uid).onSnapshot((doc) => {
 			if (!doc.exists) {
 				db.doc("users/" + user.uid).set({
 					name: user.displayName,
@@ -33,9 +33,24 @@ function App() {
 				<br />
 				<Switch>
 					{/* <Route exact path="/" component={() => <Landing />}></Route> */}
-					<Route exact path="/projects" component={() => <Projects user={user} firebase={firebase} db={db} userdata={userdata} />}></Route>
+					<Route
+						exact
+						path="/projects"
+						component={() => (
+							<Projects
+								user={user}
+								firebase={firebase}
+								db={db}
+								userdata={userdata}
+							/>
+						)}></Route>
 					<Route exact path="/kanban"></Route>
-					<Route exact path="/login" component={() => <Login user={user} firebase={firebase} auth={auth} />}></Route>
+					<Route
+						exact
+						path="/login"
+						component={() => (
+							<Login user={user} firebase={firebase} auth={auth} />
+						)}></Route>
 				</Switch>
 			</BrowserRouter>
 		</div>
