@@ -22,12 +22,9 @@ const App = () => {
 					<br />
 					<Switch>
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
-						<Route
-							exact
-							path="/projects"
-							component={() => <Projects />}></Route>
-						<Route exact path="/kanban"></Route>
-						<Route exact path="/login" component={() => <Login />}></Route>
+						<Route exact path="/projects" component={Projects} />
+						<Route exact path="/kanban" />
+						<Route exact path="/login" component={Login} />
 					</Switch>
 				</BrowserRouter>
 			</DataStoreProvider>
