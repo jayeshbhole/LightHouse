@@ -4,9 +4,9 @@ import Button from "react-bulma-components/lib/components/button";
 import Card from "react-bulma-components/lib/components/card";
 import "../assets/scss/login.scss";
 
-const Login = ({ user, firebase, auth }) => {
-	return !!user ? (
-		<Redirect path="/" />
+const Login = ({ firebase, auth }) => {
+	return !!auth.currentUser ? (
+		<Redirect to="/" />
 	) : (
 		<Card className="login-card">
 			<Button
