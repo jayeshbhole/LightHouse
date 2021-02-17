@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Container } from "react-bulma-components/lib/components/container";
-import ProjectCard from "./projectcard";
+import ProjectCard from "./Projectcard";
+import { DataStore } from "../context/DataStore";
 
-const Projects = ({ userdata }) => {
-	if (!userdata) {
-		return null;
-	}
+const Projects = () => {
+	const { userData } = useContext(DataStore);
+
 	return (
-		<div>
-			{userdata.projects.map((project, index) => {
-				return <ProjectCard key={index} project={project} />;
-			})}
+		<div className="page">
+			Your Projects:
+			<br />
+			{userData &&
+				userData.projects.map((project, index) => {
+					return <ProjectCard key={index} project={project} />;
+				})}
 		</div>
 	);
 };
