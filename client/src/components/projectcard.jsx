@@ -4,15 +4,16 @@ import Dropdown from "react-bulma-components/lib/components/dropdown";
 import "../assets/scss/projectcard.scss";
 
 const ProjectCard = ({ project }) => {
+	const { name, description } = project;
 	return (
 		<Card className="projectcard">
 			<Card.Content>
-				<div class="is-flex">
-					<div className="title is-3">{project.name}</div>
+				<div className="is-flex">
+					<div className="title is-3">{name}</div>
 					<Dropdown
 						label={
-							<span class="icon is-big">
-								<i class="rbc rbc-bars"></i>
+							<span className="icon is-big">
+								<i className="rbc rbc-bars"></i>
 							</span>
 						}>
 						<Dropdown.Item value="item">Dropdown item</Dropdown.Item>
@@ -24,7 +25,7 @@ const ProjectCard = ({ project }) => {
 					</Dropdown>
 				</div>
 
-				<div className="subtitle is-5">{project.description}</div>
+				<div className="subtitle is-5">{description}</div>
 			</Card.Content>
 			<Card.Footer>
 				<Card.Footer.Item>Yes</Card.Footer.Item>
