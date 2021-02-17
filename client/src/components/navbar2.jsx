@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import Navbar from "react-bulma-components/lib/components/navbar";
 import Heading from "react-bulma-components/lib/components/heading";
 import Container from "react-bulma-components/lib/components/container";
 import Button from "react-bulma-components/lib/components/button";
 
-const Navigation = ({ user, auth }) => {
+import { DataStore } from "../context/DataStore";
+const Navigation = () => {
+	const { authUser, auth } = useContext(DataStore);
 	const [active, setActive] = React.useState(false);
 	return (
 		<Navbar fixed="top" active={active}>
@@ -18,7 +20,7 @@ const Navigation = ({ user, auth }) => {
 				</Navbar.Brand>
 				<Navbar.Menu>
 					<Navbar.Container>
-						<Navbar.Item>
+						{/* <Navbar.Item>
 							<NavLink exact to="/">
 								Home
 							</NavLink>
@@ -29,22 +31,22 @@ const Navigation = ({ user, auth }) => {
 						<Navbar.Item>
 							<NavLink to="/mindmap">Mind Map</NavLink>
 						</Navbar.Item>
-						{user ? (
+						{authUser && (
 							<Navbar.Item>
 								<NavLink to="/projects">Projects</NavLink>
 							</Navbar.Item>
-						) : null}
+						)} */}
 					</Navbar.Container>
 					<Navbar.Container position="end">
-						<Navbar.Item>
-							{user ? (
-								<Button color="danger" onClick={() => auth.signOut()}>
-									Log Out
-								</Button>
-							) : (
-								<NavLink to="/login">Login</NavLink>
-							)}
-						</Navbar.Item>
+						{/* <Navbar.Item> */}
+						{authUser[0] ? (
+							<Navbar.Item color="danger" onClick={() => auth.signOut()}>
+								Log Out
+							</Navbar.Item>
+						) : (
+							<Navbar.Item href="/login">Login</Navbar.Item>
+						)}
+						{/* </Navbar.Item> */}
 					</Navbar.Container>
 				</Navbar.Menu>
 			</Container>
