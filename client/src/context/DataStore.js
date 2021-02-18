@@ -48,6 +48,7 @@ const DataStoreProvider = (props) => {
 	return (
 		<DataStore.Provider
 			value={{
+				firebase,
 				auth,
 				authUser,
 				userData,
