@@ -9,8 +9,8 @@ import "firebase/auth";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 // import Landing from "./components/landing.jsx";
 import Navigation from "./components/navbar2";
-import Login from "./components/login";
-import Projects from "./components/projects";
+import Login from "./components/Login";
+import Projects from "./components/Projects";
 
 // Contexts
 import { DataStoreProvider } from "./context/DataStore";
