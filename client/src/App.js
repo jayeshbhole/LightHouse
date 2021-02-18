@@ -26,13 +26,7 @@ const App = () => {
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 						<Route exact path="/projects" component={Projects} />
 						<Route exact path="/kanban" />
-						<Route
-							exact
-							path="/login"
-							component={() => (
-								<Login firebase={firebase} auth={firebase.auth()} />
-							)}
-						/>
+						<Route exact path="/login" component={() => <Login />} />
 					</Switch>
 				</BrowserRouter>
 			</DataStoreProvider>
