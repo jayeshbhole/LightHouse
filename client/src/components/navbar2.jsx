@@ -20,7 +20,7 @@ const Navigation = () => {
 				</Navbar.Brand>
 				<Navbar.Menu>
 					<Navbar.Container>
-						{/* <Navbar.Item>
+						<Navbar.Item>
 							<NavLink exact to="/">
 								Home
 							</NavLink>
@@ -35,7 +35,7 @@ const Navigation = () => {
 							<Navbar.Item>
 								<NavLink to="/projects">Projects</NavLink>
 							</Navbar.Item>
-						)} */}
+						)}
 					</Navbar.Container>
 					<Navbar.Container position="end">
 						{/* <Navbar.Item> */}
