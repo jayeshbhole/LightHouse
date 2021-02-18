@@ -1,12 +1,16 @@
-import React from "react";
+import { useContext } from "react";
 import { Redirect } from "react-router-dom";
+import { DataStore } from "../context/DataStore";
+// Components
 import Button from "react-bulma-components/lib/components/button";
 import Card from "react-bulma-components/lib/components/card";
 import "../assets/scss/login.scss";
 
-const Login = ({ firebase, auth }) => {
-	return !!auth.currentUser ? (
-		<Redirect to="/" />
+const Login = () => {
+	const { authUser, auth, firebase } = useContext(DataStore);
+
+	return authUser[0] ? (
+		<Redirect to="/projects" />
 	) : (
 		<Card className="login-card">
 			<Button
