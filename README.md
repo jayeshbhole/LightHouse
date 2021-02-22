@@ -1,3 +1,6 @@
 # LightHouse - Project Management App
 
-Website to manage and decide the flow of your projects, tasks and deadlines
+A Progressive Web Application to manage and decide the flow of your projects, tasks and deadlines
+
+![](Design/Kanban.png)
+
