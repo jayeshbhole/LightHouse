@@ -1,9 +1,9 @@
 // Dependancies
 import React from "react";
-import "./assets/scss/App.scss";
-
-import firebase from "firebase/app";
 import "firebase/auth";
+
+// Styles
+import "./assets/scss/App.scss";
 
 // Components
 import { BrowserRouter, Switch, Route } from "react-router-dom";
@@ -11,6 +11,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navigation from "./components/navbar2";
 import Login from "./components/Login";
 import Projects from "./components/Projects";
+import Kanban from "./components/Kanban";
 
 // Contexts
 import { DataStoreProvider } from "./context/DataStore";
@@ -25,8 +26,8 @@ const App = () => {
 					<Switch>
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 						<Route exact path="/projects" component={Projects} />
-						<Route exact path="/kanban" />
-						<Route exact path="/login" component={() => <Login />} />
+						<Route exact path="/kanban" component={Kanban} />
+						<Route exact path="/login" component={Login} />
 					</Switch>
 				</BrowserRouter>
 			</DataStoreProvider>
