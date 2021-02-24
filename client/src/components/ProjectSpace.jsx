@@ -22,29 +22,26 @@ const ProjectSpace = () => {
 
 	return (
 		<>
-			<Route exact path="/" component={() => <ProjPage project={project} />} />
 			<Route
 				exact
 				path="/kanban"
 				component={() => <Kanban project={project} />}
 			/>
-
-			{/* <Route path="/map" component={Mindmap}/> */}
+			<Route exact path="" component={() => <ProjPage project={project} />} />
 		</>
 	);
 };
 
 const ProjPage = ({ project }) => {
 	return (
-		<>
+		<div className="meta">
 			Project Work Space
 			<br />
 			<h2>{project?.name}</h2>
 			<br />
 			<br />
 			<p>{project?.description}</p>
-		</>
+		</div>
 	);
 };
-
 export default ProjectSpace;

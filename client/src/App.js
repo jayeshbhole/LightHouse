@@ -6,7 +6,7 @@ import "firebase/auth";
 import "./assets/scss/App.scss";
 
 // Components
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 // import Landing from "./components/landing.jsx";
 import Navigation from "./components/navbar2";
 import Login from "./components/Login";
@@ -25,8 +25,9 @@ const App = () => {
 					<Switch>
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 						<Route exact path="/projects" component={Projects} />
-						<Route exact path="/p/:projectID" component={ProjectSpace} />
+						<Route exact path="/p/:projectID/" component={ProjectSpace} />
 						<Route exact path="/login" component={Login} />
+						<Redirect to="/login" />
 					</Switch>
 				</BrowserRouter>
 			</DataStoreProvider>
