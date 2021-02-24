@@ -26,7 +26,7 @@ const App = () => {
 					<Switch>
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 						<Route exact path="/projects" component={Projects} />
-						<Route exact path="/kanban" component={Kanban} />
+						<Route exact path="/kanban/:projectID" component={Kanban} />
 						<Route exact path="/login" component={Login} />
 					</Switch>
 				</BrowserRouter>
