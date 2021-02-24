@@ -1,5 +1,4 @@
-import React, { createContext, useState } from "react";
-import { useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import firebase, { auth, db } from "../firebase";
 
@@ -8,26 +7,14 @@ const DataStore = createContext({
 	authUser: null,
 	userData: null,
 	projects: null,
-	project: null,
 	getProject: () => {},
 	getAuthUser: () => {},
 });
 
 const DataStoreProvider = (props) => {
 	const authUser = useAuthState(auth);
-
 	const [userData, setUserData] = useState();
-	const [projectID, setProjectID] = useState();
-	const [project, setProject] = useState();
-
-	useEffect(() => {
-		const unsub = db.doc(`projects/${projectID}`).onSnapshot((doc) => {
-			if (doc.exists) setProject(doc);
-		});
-
-		// Unsubscribe listener
-		return () => unsub && unsub();
-	}, [projectID]);
+	const [projects, setProjects] = useState();
 
 	useEffect(() => {
 		let unsub = null;
@@ -40,6 +27,7 @@ const DataStoreProvider = (props) => {
 						projects: [],
 					});
 				setUserData(doc.data());
+				setProjects(doc.data().projects);
 			});
 		// Unsubscribe firestore listener
 		return () => unsub && unsub();
@@ -52,8 +40,7 @@ const DataStoreProvider = (props) => {
 				auth,
 				authUser,
 				userData,
-				getProject: setProjectID,
-				project,
+				projects,
 			}}>
 			{props.children}
 		</DataStore.Provider>
