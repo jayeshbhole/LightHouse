@@ -11,7 +11,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navigation from "./components/navbar2";
 import Login from "./components/Login";
 import Projects from "./components/Projects";
-import Kanban from "./components/Kanban";
+import ProjectSpace from "./components/ProjectSpace";
 
 // Contexts
 import { DataStoreProvider } from "./context/DataStore";
@@ -22,11 +22,10 @@ const App = () => {
 			<DataStoreProvider>
 				<BrowserRouter>
 					<Navigation />
-					<br />
 					<Switch>
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 						<Route exact path="/projects" component={Projects} />
-						<Route exact path="/kanban/:projectID" component={Kanban} />
+						<Route exact path="/p/:projectID" component={ProjectSpace} />
 						<Route exact path="/login" component={Login} />
 					</Switch>
 				</BrowserRouter>
