@@ -5,6 +5,7 @@
 	background-color: rgba(0, 0, 0, 0.6);
 	top: 0;
 	left: 0;
+	z-index: 1000;
 	form {
 		position: fixed;
 		top: 50%;
@@ -28,5 +29,8 @@
 	input,
 	textarea {
 		width: 100%;
+	}
+	.btnholder {
+		text-align: center;
 	}
 }
