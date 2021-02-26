@@ -21,7 +21,7 @@ const DataStoreProvider = (props) => {
 		if (authUser[0] && !userData)
 			unsub = db.doc(`users/${authUser[0].uid}`).onSnapshot((doc) => {
 				if (!doc.exists)
-					db.doc("users/" + authUser.uid).set({
+					db.doc("users/" + authUser[0].uid).set({
 						name: authUser[0].displayName,
 						email: authUser[0].email,
 						projects: [],
