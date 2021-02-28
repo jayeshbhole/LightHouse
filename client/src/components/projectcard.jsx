@@ -1,13 +1,19 @@
 import React from "react";
 import Card from "react-bulma-components/lib/components/card";
 import Dropdown from "react-bulma-components/lib/components/dropdown";
+import { useHistory } from "react-router-dom";
+
 import "../assets/scss/projectcard.scss";
 
 const ProjectCard = ({ project }) => {
 	const { name, description } = project;
+	const history = useHistory();
+	const handleProjectClick = (projectID) => {
+		history.push(`/p/${projectID}`);
+	};
 	return (
 		<Card className="projectcard">
-			<Card.Content>
+			<Card.Content onClick={() => handleProjectClick(project.id)}>
 				<div className="is-flex">
 					<div className="title is-3">{name}</div>
 					<Dropdown

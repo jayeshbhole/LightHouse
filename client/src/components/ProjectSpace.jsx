@@ -6,19 +6,16 @@ import Kanban from "./Kanban";
 
 const ProjectSpace = () => {
 	const { projectID } = useParams();
-	const { userData } = useContext(DataStore);
+	const { userData, db } = useContext(DataStore);
 	const [projRef, setProjRef] = useState();
 
-	const [project, projLoading, projError] = useDocumentData(projRef);
-
-	useEffect(() => {
-		setProjRef(
-			userData?.projects.find(({ id }) => id === projectID)?.reference
-		);
-	}, [projectID, userData]);
-
+	const [project, projLoading, projError] = useDocumentData(
+		db.doc(`projects/${projectID}`)
+	);
 	// Debug
-	useEffect(() => console.log(project), [project]);
+	// useEffect(() => {
+	// 	console.log("Project ", project, projectID);
+	// }, [project]);
 
 	return (
 		<>

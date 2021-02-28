@@ -1,9 +1,14 @@
-.projectcard .is-flex {
-	justify-content: space-between;
-}
-.projectcard .dropdown-trigger .is-small {
-	display: none;
-}
-.projectcard .dropdown-trigger button {
-	border-radius: 50%;
+.projectcard {
+	margin: 1rem;
+	width: 1fr;
+	cursor: pointer;
+	.is-flex {
+		justify-content: space-between;
+	}
+	.dropdown-trigger .is-small {
+		display: none;
+	}
+	.dropdown-trigger button {
+		border-radius: 50%;
+	}
 }
