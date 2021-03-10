@@ -17,7 +17,7 @@ import ProjectSpace from "./components/ProjectSpace";
 import { DataStore, DataStoreProvider } from "./context/DataStore";
 
 const App = () => {
-	const { authUser } = useContext(DataStore);
+	const { userData } = useContext(DataStore);
 	return (
 		<div className="app">
 			<DataStoreProvider>
@@ -27,14 +27,8 @@ const App = () => {
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 
 						{/* Paths for authenticated user */}
-						{authUser
-							? [0] && (
-									<>
-										<Route exact path="/projects" component={Projects} />
-										<Route path="/p/:projectID/" component={ProjectSpace} />
-									</>
-							  )
-							: null}
+						<Route exact path="/projects" component={Projects} />
+						<Route path="/p/:projectID/" component={ProjectSpace} />
 						<Route exact path="/login" component={Login} />
 						<Redirect to="/login" />
 					</Switch>

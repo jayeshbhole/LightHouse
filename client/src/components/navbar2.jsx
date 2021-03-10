@@ -7,8 +7,45 @@ import Button from "react-bulma-components/lib/components/button";
 
 import { DataStore } from "../context/DataStore";
 const Navigation = () => {
-	const { authUser, auth } = useContext(DataStore);
+	const { authUser, auth, notifications, db, userData } = useContext(DataStore);
 	const [active, setActive] = React.useState(false);
+
+	const accept = (projectId) => {
+		let index = -1;
+		db.doc("projects" + projectId)
+			.get()
+			.then((doc) => {
+				if (doc.exists) {
+					db.doc("projects" + projectId).update({
+						users:
+							doc.data().users.filter((user) => user.email != userData.email) +
+							[
+								{
+									email: userData.email,
+									name: userData.name,
+									status: "member",
+								},
+							],
+					});
+				}
+			});
+	};
+
+	const reject = (projectId) => {
+		let index = -1;
+		db.doc("projects" + projectId)
+			.get()
+			.then((doc) => {
+				if (doc.exists) {
+					db.doc("projects" + projectId).update({
+						users: doc
+							.data()
+							.users.filter((user) => user.email != userData.email),
+					});
+				}
+			});
+	};
+
 	return (
 		<Navbar fixed="top" active={active}>
 			<Container fluid>
