@@ -8,7 +8,7 @@ import "./assets/scss/App.scss";
 // Components
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 // import Landing from "./components/landing.jsx";
-import Navigation from "./components/navbar2";
+import Navigation from "./components/Navbar2";
 import Login from "./components/Login";
 import Projects from "./components/Projects";
 import ProjectSpace from "./components/ProjectSpace";
