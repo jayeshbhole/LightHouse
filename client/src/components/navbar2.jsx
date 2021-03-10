@@ -20,7 +20,7 @@ const Navigation = () => {
 				</Navbar.Brand>
 				<Navbar.Menu>
 					<Navbar.Container>
-						<Navbar.Item>
+						{/* <Navbar.Item>
 							<NavLink exact to="/">
 								Home
 							</NavLink>
@@ -30,7 +30,7 @@ const Navigation = () => {
 						</Navbar.Item>
 						<Navbar.Item>
 							<NavLink to="/mindmap">Mind Map</NavLink>
-						</Navbar.Item>
+						</Navbar.Item> */}
 						{authUser && (
 							<Navbar.Item>
 								<NavLink to="/projects">Projects</NavLink>

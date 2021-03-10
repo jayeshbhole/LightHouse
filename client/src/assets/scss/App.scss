@@ -4,4 +4,13 @@
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
+	.page {
+		height: 100%;
+		width: 100%;
+		padding: 3rem;
+		.projects {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
 }

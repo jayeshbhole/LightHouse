@@ -1,6 +1,8 @@
 .projectcard {
 	margin: 1rem;
-	width: 1fr;
+	width: 30%;
+	// height: fit-content;
+	min-height: 100%;
 	cursor: pointer;
 	.is-flex {
 		justify-content: space-between;

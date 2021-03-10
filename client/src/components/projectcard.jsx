@@ -15,8 +15,8 @@ const ProjectCard = ({ project }) => {
 		<Card className="projectcard">
 			<Card.Content onClick={() => handleProjectClick(project.id)}>
 				<div className="is-flex">
-					<div className="title is-3">{name}</div>
-					<Dropdown
+					<div className="title is-4">{name}</div>
+					{/* <Dropdown
 						label={
 							<span className="icon is-big">
 								<i className="rbc rbc-bars"></i>
@@ -28,10 +28,10 @@ const ProjectCard = ({ project }) => {
 						<Dropdown.Item value="other 2">Other Dropdown item</Dropdown.Item>
 						<Dropdown.Divider />
 						<Dropdown.Item value="divider">With divider</Dropdown.Item>
-					</Dropdown>
+					</Dropdown> */}
 				</div>
 
-				<div className="subtitle is-5">{description}</div>
+				<div className="subtitle is-6">{description}</div>
 			</Card.Content>
 			<Card.Footer>
 				<Card.Footer.Item>Yes</Card.Footer.Item>

@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import ProjectCard from "./Projectcard";
 import CreateProject from "./CreateProject";
 import { DataStore } from "../context/DataStore";
+import Button from "react-bulma-components/lib/components/button";
 
 const Projects = () => {
 	const { userData } = useContext(DataStore);
@@ -9,15 +10,16 @@ const Projects = () => {
 
 	return (
 		<div className="page">
-			Your Projects:
-			<br />
-			<button onClick={() => settoggle(!toggle)}>New Project</button>
-			{toggle ? <CreateProject close={() => settoggle(false)} /> : null}
-			<br />
-			{userData &&
-				userData.projects.map((project, index) => {
-					return <ProjectCard key={index} project={project} />;
-				})}
+			<h4 className="title is-3 ">Projects</h4>
+			<Button onClick={() => settoggle(!toggle)}>New Project</Button>
+			<div className="projects">
+				{toggle ? <CreateProject close={() => settoggle(false)} /> : null}
+				<br />
+				{userData &&
+					userData.projects.map((project, index) => {
+						return <ProjectCard key={index} project={project} />;
+					})}
+			</div>
 		</div>
 	);
 };
