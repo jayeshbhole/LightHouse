@@ -28,7 +28,7 @@ const DataStoreProvider = (props) => {
 						projects: [],
 					});
 				setUserData(doc.data());
-				setProjects(doc.data().projects);
+				setProjects(doc.data()?.projects);
 			});
 		// Unsubscribe firestore listener
 		return () => unsub && unsub();

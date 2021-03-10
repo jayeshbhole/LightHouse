@@ -1,5 +1,5 @@
 // Dependancies
-import React from "react";
+import React, { useContext } from "react";
 import "firebase/auth";
 
 // Styles
@@ -14,9 +14,10 @@ import Projects from "./components/Projects";
 import ProjectSpace from "./components/ProjectSpace";
 
 // Contexts
-import { DataStoreProvider } from "./context/DataStore";
+import { DataStore, DataStoreProvider } from "./context/DataStore";
 
 const App = () => {
+	const { authUser } = useContext(DataStore);
 	return (
 		<div className="app">
 			<DataStoreProvider>
@@ -24,8 +25,16 @@ const App = () => {
 					<Navigation />
 					<Switch>
 						{/* <Route exact path="/" component={() => <Landing />}></Route> */}
-						<Route exact path="/projects" component={Projects} />
-						<Route path="/p/:projectID/" component={ProjectSpace} />
+
+						{/* Paths for authenticated user */}
+						{authUser
+							? [0] && (
+									<>
+										<Route exact path="/projects" component={Projects} />
+										<Route path="/p/:projectID/" component={ProjectSpace} />
+									</>
+							  )
+							: null}
 						<Route exact path="/login" component={Login} />
 						<Redirect to="/login" />
 					</Switch>
