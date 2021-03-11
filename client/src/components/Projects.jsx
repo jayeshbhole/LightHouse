@@ -7,7 +7,6 @@ import Card from "react-bulma-components/lib/components/card";
 const Projects = () => {
 	const { userData } = useContext(DataStore);
 	const [toggle, settoggle] = useState(false);
-	console.log(userData);
 
 	return (
 		<div className="page">

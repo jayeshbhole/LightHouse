@@ -17,7 +17,6 @@ import ProjectSpace from "./components/ProjectSpace";
 import { DataStore, DataStoreProvider } from "./context/DataStore";
 
 const App = () => {
-	const { userData } = useContext(DataStore);
 	return (
 		<div className="app">
 			<DataStoreProvider>

@@ -30,7 +30,7 @@ const CreateProject = ({ close }) => {
 			})
 			.then((docRef) => {
 				console.log(docRef);
-				db.doc("users/" + authUser[0].uid).update({
+				db.doc("users/" + authUser[0].email).update({
 					projects: firebase.firestore.FieldValue.arrayUnion({
 						name: data.name,
 						description: data.description,
