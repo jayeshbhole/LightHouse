@@ -23,6 +23,7 @@ const Navigation = () => {
 								{
 									email: userData.email,
 									name: userData.name,
+									photoURL: authUser[0].photoURL,
 									status: "member",
 								},
 							],

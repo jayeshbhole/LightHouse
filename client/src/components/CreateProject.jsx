@@ -23,6 +23,7 @@ const CreateProject = ({ close }) => {
 					{
 						name: userData.name,
 						email: userData.email,
+						photoURL: authUser[0].photoURL,
 						status: "owner",
 					},
 				],
@@ -39,7 +40,7 @@ const CreateProject = ({ close }) => {
 								name: userData.name,
 								email: userData.email,
 								status: "owner",
-								img: "",
+								photoURL: authUser[0].photoURL,
 							},
 						],
 					}),

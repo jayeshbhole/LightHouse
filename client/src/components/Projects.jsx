@@ -2,13 +2,12 @@ import { useContext, useState } from "react";
 import ProjectCard from "./Projectcard";
 import CreateProject from "./CreateProject";
 import { DataStore } from "../context/DataStore";
-import Button from "react-bulma-components/lib/components/button";
 import Card from "react-bulma-components/lib/components/card";
-import Dropdown from "react-bulma-components/lib/components/dropdown";
 
 const Projects = () => {
 	const { userData } = useContext(DataStore);
 	const [toggle, settoggle] = useState(false);
+	console.log(userData);
 
 	return (
 		<div className="page">
