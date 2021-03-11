@@ -14,4 +14,15 @@
 	.dropdown-trigger button {
 		border-radius: 50%;
 	}
+	.card-footer {
+		padding: 5px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.footer-img img {
+		border-radius: 50%;
+		width: 2.5rem;
+		padding: 0 2px;
+	}
 }
