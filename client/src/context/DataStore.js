@@ -38,7 +38,7 @@ const DataStoreProvider = (props) => {
 					setProjects(doc.data()?.projects);
 				}
 			});
-			unsub2 = db.doc("notifications/" + userData.email).onSnapshot((doc) => {
+			unsub2 = db.doc("notifications/" + userData?.email).onSnapshot((doc) => {
 				if (doc.exists) {
 					setNotifications(doc.data().notifications);
 				}
