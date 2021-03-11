@@ -12,12 +12,15 @@ const DataStore = createContext({
 	logout: () => {},
 	getProject: () => {},
 	getAuthUser: () => {},
+	project: null,
+	setProject: () => {},
 });
 
 const DataStoreProvider = (props) => {
 	const authUser = useAuthState(auth);
 	const [userData, setUserData] = useState();
 	const [projects, setProjects] = useState();
+	const [project, setProject] = useState();
 	const [notifications, setNotifications] = useState();
 
 	const logout = () => {
@@ -73,6 +76,8 @@ const DataStoreProvider = (props) => {
 				projects,
 				notifications,
 				logout,
+				project,
+				setProject,
 			}}>
 			{props.children}
 		</DataStore.Provider>
