@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import "../assets/scss/projectcard.scss";
 
 const ProjectCard = ({ project }) => {
-	const { name, description } = project;
+	const { name, description, users } = project;
 	const history = useHistory();
 	const handleProjectClick = (projectID) => {
 		history.push(`/p/${projectID}`);
@@ -15,14 +15,18 @@ const ProjectCard = ({ project }) => {
 		<Card className="projectcard">
 			<Card.Content onClick={() => handleProjectClick(project.id)}>
 				<div className="is-flex">
-					<div className="title is-4">{name}</div>
+					<h3 className="title is-4">{name}</h3>
 					<span></span>
 				</div>
 
 				<div className="subtitle is-6">{description}</div>
 			</Card.Content>
 			<Card.Footer>
-				<Card.Footer.Item>Yes</Card.Footer.Item>
+				{users.map(({ photoURL }) => (
+					<div className="footer-img">
+						<img src={photoURL} alt="" />
+					</div>
+				))}
 			</Card.Footer>
 		</Card>
 	);
