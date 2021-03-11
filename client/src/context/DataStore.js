@@ -9,6 +9,7 @@ const DataStore = createContext({
 	projects: null,
 	notifications: null,
 	db: db,
+	logout: () => {},
 	getProject: () => {},
 	getAuthUser: () => {},
 });
@@ -19,15 +20,23 @@ const DataStoreProvider = (props) => {
 	const [projects, setProjects] = useState();
 	const [notifications, setNotifications] = useState();
 
+	const logout = () => {
+		auth.signOut();
+		setUserData(null);
+		setProjects(null);
+		setNotifications(null);
+	};
+
 	useEffect(() => {
 		let unsub = null;
 		let unsub2 = null;
 		if (authUser[0] && !userData) {
-			unsub = db.doc(`users/${authUser[0].uid}`).onSnapshot((doc) => {
+			unsub = db.doc(`users/${authUser[0].email}`).onSnapshot((doc) => {
 				if (!doc.exists) {
-					db.doc("users/" + authUser[0].uid).set({
+					db.doc("users/" + authUser[0].email).set({
 						name: authUser[0].displayName,
 						email: authUser[0].email,
+						photoURL: authUser[0].photoURL,
 						projects: [],
 					});
 					db.doc("notifications/" + authUser[0].email).set({
@@ -38,11 +47,13 @@ const DataStoreProvider = (props) => {
 					setProjects(doc.data()?.projects);
 				}
 			});
-			unsub2 = db.doc("notifications/" + userData?.email).onSnapshot((doc) => {
-				if (doc.exists) {
-					setNotifications(doc.data().notifications);
-				}
-			});
+			unsub2 = db
+				.doc("notifications/" + authUser[0].email)
+				.onSnapshot((doc) => {
+					if (doc.exists) {
+						setNotifications(doc.data().notifications);
+					}
+				});
 		}
 		// Unsubscribe firestore listener
 		return () => {
@@ -61,6 +72,7 @@ const DataStoreProvider = (props) => {
 				userData,
 				projects,
 				notifications,
+				logout,
 			}}>
 			{props.children}
 		</DataStore.Provider>

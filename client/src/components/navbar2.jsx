@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { useContext, useState } from "react";
+import { NavLink, useHistory, withRouter } from "react-router-dom";
 import Navbar from "react-bulma-components/lib/components/navbar";
 import Heading from "react-bulma-components/lib/components/heading";
 import Container from "react-bulma-components/lib/components/container";
@@ -7,8 +7,11 @@ import Button from "react-bulma-components/lib/components/button";
 
 import { DataStore } from "../context/DataStore";
 const Navigation = () => {
-	const { authUser, auth, notifications, db, userData } = useContext(DataStore);
-	const [active, setActive] = React.useState(false);
+	const { authUser, notifications, db, userData, logout } = useContext(
+		DataStore
+	);
+	const [active, setActive] = useState(false);
+	const history = useHistory();
 
 	const accept = (projectId) => {
 		let index = -1;
@@ -23,6 +26,7 @@ const Navigation = () => {
 								{
 									email: userData.email,
 									name: userData.name,
+									photoURL: authUser[0].photoURL,
 									status: "member",
 								},
 							],
@@ -77,7 +81,12 @@ const Navigation = () => {
 					<Navbar.Container position="end">
 						{/* <Navbar.Item> */}
 						{authUser[0] ? (
-							<Navbar.Item color="danger" onClick={() => auth.signOut()}>
+							<Navbar.Item
+								color="danger"
+								onClick={() => {
+									history.push("/login");
+									logout();
+								}}>
 								Log Out
 							</Navbar.Item>
 						) : (
