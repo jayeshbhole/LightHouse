@@ -8,7 +8,7 @@ import "./assets/scss/App.scss";
 // Components
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 // import Landing from "./components/landing.jsx";
-import Navbar2 from "./components/Navbar2";
+import Navbar from "./components/Navbar";
 
 import Login from "./components/Login";
 import Projects from "./components/Projects";
@@ -24,7 +24,7 @@ const App = () => {
 	return (
 		<div className="app">
 			<BrowserRouter>
-				<Navbar2 />
+				<Navbar />
 				<Switch>
 					{/* <Route exact path="/" component={() => <Landing />}></Route> */}
 
