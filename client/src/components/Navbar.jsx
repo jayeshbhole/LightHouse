@@ -99,7 +99,7 @@ const Navbar = () => {
 						<>
 							<span
 								className={`nav-item bell ${
-									notifications.length ? "unseen" : null
+									notifications?.length ? "unseen" : null
 								} dropdown`}>
 								<img src={NotifBell} alt="" />
 								<div className="dropdown-box"></div>
