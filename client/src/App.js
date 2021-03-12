@@ -10,6 +10,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 // import Landing from "./components/landing.jsx";
 import Navbar from "./components/Navbar";
 
+import Home from "./components/Home";
 import Login from "./components/Login";
 import Projects from "./components/Projects";
 import ProjectSpace from "./components/ProjectSpace";
@@ -26,7 +27,7 @@ const App = () => {
 			<BrowserRouter>
 				<Navbar />
 				<Switch>
-					{/* <Route exact path="/" component={() => <Landing />}></Route> */}
+					<Route exact path="/" component={() => <Home />}></Route>
 
 					{/* Paths for authenticated user */}
 					{isLoggedIn && <Route exact path="/projects" component={Projects} />}
