@@ -2,72 +2,75 @@ nav {
 	position: sticky;
 	top: 0;
 	left: 0;
-	width: 100vw;
+	width: 100%;
+	$text: rgb(129, 129, 129);
+	background-color: rgb(255, 255, 255);
+	$dec: blue;
+	color: $text;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.123);
+	height: 60px;
+
 	.navbar {
-		$text: rgb(129, 129, 129);
-		background-color: rgb(255, 255, 255);
-		$dec: blue;
 		display: flex;
-		justify-content: flex-start;
-		padding: 0rem 2rem;
-		margin: 0;
+		justify-content: space-between;
+		width: 95%;
+		margin: auto;
+		height: 100%;
+	}
+	.start,
+	.end {
+		display: flex;
+		height: 100%;
+	}
+
+	a {
 		color: $text;
-		list-style: none;
-		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.123);
+		text-decoration: none;
+	}
+	.brand,
+	.brand img {
+		height: 100%;
+	}
+	.nav-item {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		padding: 0 0.5rem;
+		font-size: 1.2rem;
+		cursor: pointer;
+	}
 
-		:link,
-		:visited {
-			color: $text;
-			text-decoration: none;
-		}
-		.logo {
-			display: flex;
-			align-items: center;
-			padding: 0 1.5rem;
-			img {
-				height: 3.5rem;
+	.start .nav-item:hover {
+		background-color: #f5f5f5;
+	}
+
+	.profile img {
+		border-radius: 50%;
+		height: 80%;
+	}
+
+	.dropdown {
+		position: relative;
+		.dropdown-box {
+			display: none;
+			position: absolute;
+			min-width: 150px;
+			right: 0;
+			background: #fff;
+			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+			top: 60px;
+			a {
+				padding: 5px 20px;
+				display: block;
 			}
 		}
-		li {
-			display: flex;
-			align-items: center;
+	}
 
-			.--item {
-				padding: 0 1.5rem;
-				font-size: 1.1rem;
-
-				&:after {
-					content: "";
-					display: block;
-					height: 0.2rem;
-					background: $dec;
-					width: 0;
-					border-radius: 99px;
-				}
-
-				&:hover:after {
-					transition: all 0.2s ease-in-out;
-					width: 100% !important;
-				}
-
-				&.active {
-					color: black;
-
-					&:after {
-						width: 100% !important;
-					}
-				}
-			}
-		}
-		.login {
-			margin-left: auto;
-
-			img {
-				max-height: 2rem;
-				border-radius: 200px;
-				margin-left: 0.5rem;
-				margin-bottom: -0.75rem;
-			}
+	.dropdown:hover .dropdown-box {
+		display: block;
+		a:hover {
+			background-color: #f5f5f5;
 		}
 	}
 }
