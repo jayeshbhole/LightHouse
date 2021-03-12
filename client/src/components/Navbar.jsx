@@ -58,7 +58,7 @@ const Navbar = () => {
 							<Route
 								exact
 								path={["/", "/kanban", "/mindmap", "/login"]}
-								render={() => "LightHouse"}
+								component={() => <span>LightHouse</span>}
 							/>
 						</NavLink>
 					</span>
