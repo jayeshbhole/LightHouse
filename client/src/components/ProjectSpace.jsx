@@ -34,57 +34,59 @@ const ProjectSpace = () => {
 
 const ProjectTab = ({ project: { name, description, users, cards } }) => {
 	return (
-		<div className="tab">
-			<div className="top-bar">
-				<h1 className="title">{name}</h1>
-				<button>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="30"
-						height="30"
-						viewBox="0 0 24 24">
-						<path d="M19 18c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm-14-3c-1.654 0-3 1.346-3 3s1.346 3 3 3h14c1.654 0 3-1.346 3-3s-1.346-3-3-3h-14zm19 3c0 2.761-2.239 5-5 5h-14c-2.761 0-5-2.239-5-5s2.239-5 5-5h14c2.761 0 5 2.239 5 5zm0-12c0 2.761-2.239 5-5 5h-14c-2.761 0-5-2.239-5-5s2.239-5 5-5h14c2.761 0 5 2.239 5 5zm-15 0c0-1.104-.896-2-2-2s-2 .896-2 2 .896 2 2 2 2-.896 2-2z" />
-					</svg>
-				</button>
-			</div>
+		<div className="page project-space">
+			<div className="tab">
+				<div className="top-bar">
+					<h1 className="title">{name}</h1>
+					<button>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="30"
+							height="30"
+							viewBox="0 0 24 24">
+							<path d="M19 18c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm-14-3c-1.654 0-3 1.346-3 3s1.346 3 3 3h14c1.654 0 3-1.346 3-3s-1.346-3-3-3h-14zm19 3c0 2.761-2.239 5-5 5h-14c-2.761 0-5-2.239-5-5s2.239-5 5-5h14c2.761 0 5 2.239 5 5zm0-12c0 2.761-2.239 5-5 5h-14c-2.761 0-5-2.239-5-5s2.239-5 5-5h14c2.761 0 5 2.239 5 5zm-15 0c0-1.104-.896-2-2-2s-2 .896-2 2 .896 2 2 2 2-.896 2-2z" />
+						</svg>
+					</button>
+				</div>
 
-			<div className="bod">
-				<div className="left-bar">
-					<div className="desc">
-						<h4 className="title">Description</h4>
-						<p className="body">{description}</p>
+				<div className="bod">
+					<div className="left-bar">
+						<div className="desc">
+							<h4 className="title">Description</h4>
+							<p className="body">{description}</p>
+						</div>
+
+						<div className="deadline">
+							<h4 className="title">Upcoming Deadline</h4>
+							<p className="body">Some deadline{/* Deadline */}</p>
+						</div>
+
+						<div className="team">
+							<h4 className="title">Team Members</h4>
+							<ul>
+								{users.map((member, id) => {
+									return (
+										<li key={id}>
+											<p className="body">{member.name}</p>
+											<img src={member.photoURL} alt="" />
+										</li>
+									);
+								})}
+							</ul>
+						</div>
 					</div>
-
-					<div className="deadline">
-						<h4 className="title">Upcoming Deadline</h4>
-						<p className="body">Some deadline{/* Deadline */}</p>
-					</div>
-
-					<div className="team">
-						<h4 className="title">Team Members</h4>
+					<div className="right-bar">
+						<h2 className="title">Upcoming Tasks</h2>
 						<ul>
-							{users.map((member, id) => {
+							{cards.map((title, deadline, id) => {
 								return (
 									<li key={id}>
-										<p className="body">{member.name}</p>
-										<img src={member.photoURL} alt="" />
+										<TaskCard name={title} date={deadline} />
 									</li>
 								);
 							})}
 						</ul>
 					</div>
-				</div>
-				<div className="right-bar">
-					<h2 className="title">Upcoming Tasks</h2>
-					<ul>
-						{cards.map((title, deadline, id) => {
-							return (
-								<li key={id}>
-									<TaskCard name={title} date={deadline} />
-								</li>
-							);
-						})}
-					</ul>
 				</div>
 			</div>
 		</div>
