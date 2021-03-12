@@ -36,36 +36,46 @@ const ProjectTab = ({ project: { name, description, users, cards } }) => {
 	return (
 		<div className="tab">
 			<div className="top-bar">
-				<h2 className="title">{name}</h2>
+				<h1 className="title">{name}</h1>
+				<button>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="30"
+						height="30"
+						viewBox="0 0 24 24">
+						<path d="M19 18c0 1.104-.896 2-2 2s-2-.896-2-2 .896-2 2-2 2 .896 2 2zm-14-3c-1.654 0-3 1.346-3 3s1.346 3 3 3h14c1.654 0 3-1.346 3-3s-1.346-3-3-3h-14zm19 3c0 2.761-2.239 5-5 5h-14c-2.761 0-5-2.239-5-5s2.239-5 5-5h14c2.761 0 5 2.239 5 5zm0-12c0 2.761-2.239 5-5 5h-14c-2.761 0-5-2.239-5-5s2.239-5 5-5h14c2.761 0 5 2.239 5 5zm-15 0c0-1.104-.896-2-2-2s-2 .896-2 2 .896 2 2 2 2-.896 2-2z" />
+					</svg>
+				</button>
 			</div>
 
-			<div className="left-bar">
-				<div className="desc">
-					<h6 className="title">Description</h6>
-					<p className="desc-body">{description}</p>
-				</div>
+			<div className="bod">
+				<div className="left-bar">
+					<div className="desc">
+						<h4 className="title">Description</h4>
+						<p className="body">{description}</p>
+					</div>
 
-				<div className="deadline">
-					<h6 className="title">Upcoming Deadline</h6>
-					<p className="body">{/* Deadline */}</p>
-				</div>
+					<div className="deadline">
+						<h4 className="title">Upcoming Deadline</h4>
+						<p className="body">Some deadline{/* Deadline */}</p>
+					</div>
 
-				<div className="team">
-					<h6 className="title">Team Members</h6>
-					<ul>
-						{users.map((member, id) => {
-							return (
-								<li key={id}>
-									<p className="body">{member.name}</p>
-									<img src={member.photoURL} alt="" />
-								</li>
-							);
-						})}
-					</ul>
+					<div className="team">
+						<h4 className="title">Team Members</h4>
+						<ul>
+							{users.map((member, id) => {
+								return (
+									<li key={id}>
+										<p className="body">{member.name}</p>
+										<img src={member.photoURL} alt="" />
+									</li>
+								);
+							})}
+						</ul>
+					</div>
 				</div>
-
 				<div className="right-bar">
-					<h3 className="title">Upcoming Tasks</h3>
+					<h2 className="title">Upcoming Tasks</h2>
 					<ul>
 						{cards.map((title, deadline, id) => {
 							return (
