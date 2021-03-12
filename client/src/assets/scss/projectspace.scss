@@ -47,6 +47,7 @@
 			width: 30%;
 			flex-direction: column;
 			justify-content: flex-start;
+
 			ul li {
 				padding-right: 2rem;
 				display: flex;
@@ -83,13 +84,15 @@
 			}
 		}
 		.right-bar {
+			border-radius: 1rem;
+			width: 70%;
+			box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.3);
+
 			h2 {
 				color: #886eef;
 				font-weight: 400;
 				padding: 4rem;
 			}
-			width: 70%;
-			box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.3);
 		}
 	}
 }
