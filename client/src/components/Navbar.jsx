@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink, Switch, Route, useParams } from "react-router-dom";
+import { NavLink, Route, useParams } from "react-router-dom";
 import Logo from "../assets/img/Logo.svg";
 import NotifBell from "../assets/img/NotifBell.png";
 import { DataStore } from "../context/DataStore";
@@ -99,7 +99,7 @@ const Navbar = () => {
 						<>
 							<span
 								className={`nav-item bell ${
-									notifications ? "unseen" : null
+									notifications.length ? "unseen" : null
 								} dropdown`}>
 								<img src={NotifBell} alt="" />
 								<div className="dropdown-box"></div>
