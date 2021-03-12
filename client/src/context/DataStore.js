@@ -7,31 +7,62 @@ const DataStore = createContext({
 	authUser: null,
 	userData: null,
 	projects: null,
+	notifications: null,
 	db: db,
+	logout: () => {},
 	getProject: () => {},
 	getAuthUser: () => {},
+	project: null,
+	setProject: () => {},
 });
 
 const DataStoreProvider = (props) => {
 	const authUser = useAuthState(auth);
 	const [userData, setUserData] = useState();
 	const [projects, setProjects] = useState();
+	const [project, setProject] = useState();
+	const [notifications, setNotifications] = useState();
+
+	const logout = () => {
+		auth.signOut();
+		setUserData(null);
+		setProjects(null);
+		setNotifications(null);
+	};
 
 	useEffect(() => {
 		let unsub = null;
-		if (authUser[0] && !userData)
-			unsub = db.doc(`users/${authUser[0].uid}`).onSnapshot((doc) => {
-				if (!doc.exists)
-					db.doc("users/" + authUser[0].uid).set({
+		let unsub2 = null;
+		if (authUser[0] && !userData) {
+			unsub = db.doc(`users/${authUser[0].email}`).onSnapshot((doc) => {
+				if (!doc.exists) {
+					db.doc("users/" + authUser[0].email).set({
 						name: authUser[0].displayName,
 						email: authUser[0].email,
+						photoURL: authUser[0].photoURL,
 						projects: [],
 					});
-				setUserData(doc.data());
-				setProjects(doc.data()?.projects);
+					db.doc("notifications/" + authUser[0].email).set({
+						notifications: [],
+					});
+				} else {
+					setUserData(doc.data());
+					setProjects(doc.data()?.projects);
+				}
 			});
+			unsub2 = db
+				.doc("notifications/" + authUser[0].email)
+				.onSnapshot((doc) => {
+					if (doc.exists) {
+						setNotifications(doc.data().notifications);
+					}
+				});
+		}
 		// Unsubscribe firestore listener
-		return () => unsub && unsub();
+		return () => {
+			unsub && unsub();
+			unsub2 && unsub2();
+		};
 	}, [authUser[0]]);
 
 	return (
@@ -43,6 +74,10 @@ const DataStoreProvider = (props) => {
 				authUser,
 				userData,
 				projects,
+				notifications,
+				logout,
+				project,
+				setProject,
 			}}>
 			{props.children}
 		</DataStore.Provider>
