@@ -18,8 +18,8 @@ const ProjectCard = ({ project }) => {
 				<div className="subtitle is-6">{description}</div>
 			</div>
 			<div className="footer">
-				{users.map(({ photoURL }) => (
-					<div className="footer-img">
+				{users.map(({ photoURL } , index) => (
+					<div key={index} className="footer-img">
 						<img src={photoURL} alt="" />
 					</div>
 				))}
