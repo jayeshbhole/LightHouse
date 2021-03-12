@@ -3,7 +3,7 @@ import { DataStore } from "../context/DataStore";
 import "../assets/scss/CreateProject.scss";
 
 const CreateProject = ({ close }) => {
-	const { userData, authUser, firebase, db } = useContext(DataStore);
+	const { userData, firebase, db } = useContext(DataStore);
 
 	const [data, setData] = useState({
 		name: "",
@@ -12,7 +12,6 @@ const CreateProject = ({ close }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(authUser);
 		db.collection("projects")
 			.add({
 				name: data.name,
@@ -23,14 +22,14 @@ const CreateProject = ({ close }) => {
 					{
 						name: userData.name,
 						email: userData.email,
-						photoURL: authUser[0].photoURL,
+						photoURL: userData.photoURL,
 						status: "owner",
 					},
 				],
 			})
 			.then((docRef) => {
 				console.log(docRef);
-				db.doc("users/" + authUser[0].email).update({
+				db.doc("users/" + userData.email).update({
 					projects: firebase.firestore.FieldValue.arrayUnion({
 						name: data.name,
 						description: data.description,
@@ -40,7 +39,7 @@ const CreateProject = ({ close }) => {
 								name: userData.name,
 								email: userData.email,
 								status: "owner",
-								photoURL: authUser[0].photoURL,
+								photoURL: userData.photoURL,
 							},
 						],
 					}),
@@ -65,7 +64,7 @@ const CreateProject = ({ close }) => {
 					name="name"
 					id="name"
 					placeholder="Name of New Project"
-					onChange={(e) => (data.name = e.target.value)}
+					onChange={(e) => setData({ ...data, name: e.target.value })}
 				/>
 				<br />
 				<br />
@@ -75,7 +74,9 @@ const CreateProject = ({ close }) => {
 					name="description"
 					id="description"
 					rows="3"
-					onChange={(e) => (data.description = e.target.value)}></textarea>
+					onChange={(e) =>
+						setData({ ...data, description: e.target.value })
+					}></textarea>
 				<br />
 				<div className="btnholder">
 					<button name="submit" type="submit">
