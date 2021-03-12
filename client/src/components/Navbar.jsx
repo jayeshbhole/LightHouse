@@ -45,10 +45,14 @@ const Navbar = () => {
 	};
 	return (
 		<nav className="navbar">
+			{/* Display Logo */}
 			<NavLink className="nav-item brand" to="/">
 				<img src={Logo} alt="" />
+				{/* Brand Name if on Home */}
 				<Route exact path="/" render={() => "LightHouse"} />
 			</NavLink>
+
+			{/* On some project page */}
 			<Route
 				path="/p/:projectID"
 				component={() => <NavSignedProject name={project?.name} />}
@@ -58,10 +62,8 @@ const Navbar = () => {
 				path="/projects"
 				render={() => <span className="nav-item"> Your Projects </span>}
 			/>
-			<Route exact path="/">
-				<NavLink to="/projects">Your Projects</NavLink>
-			</Route>
 
+			{/* Show Kanban/Mindmap if not logged in */}
 			{!authUser[0] ? (
 				<Route path="/">
 					<NavLink to="/kanban" className="nav-item">
@@ -73,6 +75,7 @@ const Navbar = () => {
 				</Route>
 			) : null}
 
+			{/* Notification and Profile Icons if logged in else Login */}
 			{authUser[0] ? (
 				<>
 					<img src={NotifBell} alt="" />
@@ -98,6 +101,7 @@ const NavSignedProject = ({ name }) => {
 	const { projectID } = useParams();
 	return (
 		<>
+			{/* Name of Project and Kanban/Mindmap Links */}
 			<span>{name}</span>
 			<NavLink to={`/p/${projectID}/kanban`} className="nav-item">
 				Kanban
