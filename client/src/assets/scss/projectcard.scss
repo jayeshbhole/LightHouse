@@ -1,21 +1,15 @@
 .projectcard {
-	margin: 1rem;
-	width: 30%;
-	// height: fit-content;
-	min-height: 100%;
+	background: #fff;
 	border-radius: 10px;
+	border: 2px solid #eee;
+	box-shadow: 0 0.5em 1em -0.125em #10101020;
 	cursor: pointer;
-	.is-flex {
-		justify-content: space-between;
+	.body {
+		padding: 1.5em;
+		border-bottom: 1px solid #ddd;
 	}
-	.dropdown-trigger .is-small {
-		display: none;
-	}
-	.dropdown-trigger button {
-		border-radius: 50%;
-	}
-	.card-footer {
-		padding: 5px;
+	.footer {
+		padding: 5px 10px;
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;

@@ -1,0 +1,14 @@
+.projects {
+	display: grid;
+	gap: 20px;
+}
+@media only screen and (min-width: 700px) {
+	.projects {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+@media only screen and (min-width: 900px) {
+	.projects {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}

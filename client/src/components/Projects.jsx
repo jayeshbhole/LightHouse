@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import ProjectCard from "./Projectcard";
 import CreateProject from "./CreateProject";
 import { DataStore } from "../context/DataStore";
-import Card from "react-bulma-components/lib/components/card";
+import "../assets/scss/projects.scss";
 
 const Projects = () => {
 	const { userData } = useContext(DataStore);
@@ -12,18 +12,18 @@ const Projects = () => {
 		<div className="page">
 			<h4 className="title is-3 ">Projects</h4>
 			<div className="projects">
-				<Card className="projectcard">
-					<Card.Content onClick={() => settoggle(!toggle)}>
+				<div className="projectcard">
+					<div className="body">
 						<div className="is-flex">
-							<div className="title is-4">New Project</div>
-							<span className="icon is-big icon-plus">+</span>
+							<h3 className="title is-4">New Project</h3>
 						</div>
-
 						<div className="subtitle is-6">Create A new project</div>
-					</Card.Content>
-				</Card>
+					</div>
+					<div className="footer">
+						<span>Say YES to productivity</span>
+					</div>
+				</div>
 				{toggle ? <CreateProject close={() => settoggle(false)} /> : null}
-				<br />
 				{userData &&
 					userData.projects.map((project, index) => {
 						return <ProjectCard key={index} project={project} />;
