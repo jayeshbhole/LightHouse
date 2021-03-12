@@ -1,9 +1,5 @@
 .app {
 	height: 100vh;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
 	.page {
 		height: 100%;
 		width: 100%;
@@ -11,6 +7,7 @@
 		.projects {
 			display: flex;
 			flex-wrap: wrap;
+			justify-content: start;
 		}
 	}
 }

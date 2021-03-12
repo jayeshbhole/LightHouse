@@ -23,13 +23,14 @@ const CreateProject = ({ close }) => {
 					{
 						name: userData.name,
 						email: userData.email,
+						photoURL: authUser[0].photoURL,
 						status: "owner",
 					},
 				],
 			})
 			.then((docRef) => {
 				console.log(docRef);
-				db.doc("users/" + authUser[0].uid).update({
+				db.doc("users/" + authUser[0].email).update({
 					projects: firebase.firestore.FieldValue.arrayUnion({
 						name: data.name,
 						description: data.description,
@@ -39,7 +40,7 @@ const CreateProject = ({ close }) => {
 								name: userData.name,
 								email: userData.email,
 								status: "owner",
-								img: "",
+								photoURL: authUser[0].photoURL,
 							},
 						],
 					}),

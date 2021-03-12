@@ -3,6 +3,7 @@
 	width: 30%;
 	// height: fit-content;
 	min-height: 100%;
+	border-radius: 10px;
 	cursor: pointer;
 	.is-flex {
 		justify-content: space-between;
@@ -12,5 +13,16 @@
 	}
 	.dropdown-trigger button {
 		border-radius: 50%;
+	}
+	.card-footer {
+		padding: 5px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	.footer-img img {
+		border-radius: 50%;
+		width: 2.5rem;
+		padding: 0 2px;
 	}
 }

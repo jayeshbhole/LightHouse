@@ -12,24 +12,29 @@ const Login = () => {
 	return authUser[0] ? (
 		<Redirect to="/projects" />
 	) : (
-		<Card className="login-card">
-			<Button
-				color="primary"
-				onClick={() => {
-					const provider = new firebase.auth.GoogleAuthProvider();
-					auth.signInWithPopup(provider);
-				}}>
-				Login With Google
-			</Button>
-			<Button
-				className="is-dark"
-				onClick={() => {
-					const provider2 = new firebase.auth.GithubAuthProvider();
-					auth.signInWithPopup(provider2);
-				}}>
-				Login With GitHub
-			</Button>
-		</Card>
+		<div className="page login">
+			<Card className="login-card">
+				<h1 className="title is-4">Login to Continue</h1>
+				<br />
+				<br />
+				<Button
+					color="primary"
+					onClick={() => {
+						const provider = new firebase.auth.GoogleAuthProvider();
+						auth.signInWithPopup(provider);
+					}}>
+					Login With Google
+				</Button>
+				<Button
+					className="is-dark"
+					onClick={() => {
+						const provider2 = new firebase.auth.GithubAuthProvider();
+						auth.signInWithPopup(provider2);
+					}}>
+					Login With GitHub
+				</Button>
+			</Card>
+		</div>
 	);
 };
 

@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import "./assets/scss/index.scss";
+import { DataStoreProvider } from "./context/DataStore";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<App />
+		<DataStoreProvider>
+			<App />
+		</DataStoreProvider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );

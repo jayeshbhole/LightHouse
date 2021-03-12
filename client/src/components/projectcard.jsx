@@ -1,12 +1,12 @@
 import React from "react";
 import Card from "react-bulma-components/lib/components/card";
-import Dropdown from "react-bulma-components/lib/components/dropdown";
+// import Dropdown from "react-bulma-components/lib/components/dropdown";
 import { useHistory } from "react-router-dom";
 
 import "../assets/scss/projectcard.scss";
 
 const ProjectCard = ({ project }) => {
-	const { name, description } = project;
+	const { name, description, users } = project;
 	const history = useHistory();
 	const handleProjectClick = (projectID) => {
 		history.push(`/p/${projectID}`);
@@ -15,26 +15,18 @@ const ProjectCard = ({ project }) => {
 		<Card className="projectcard">
 			<Card.Content onClick={() => handleProjectClick(project.id)}>
 				<div className="is-flex">
-					<div className="title is-4">{name}</div>
-					{/* <Dropdown
-						label={
-							<span className="icon is-big">
-								<i className="rbc rbc-bars"></i>
-							</span>
-						}>
-						<Dropdown.Item value="item">Dropdown item</Dropdown.Item>
-						<Dropdown.Item value="other">Other Dropdown item</Dropdown.Item>
-						<Dropdown.Item value="active">Active Dropdown item</Dropdown.Item>
-						<Dropdown.Item value="other 2">Other Dropdown item</Dropdown.Item>
-						<Dropdown.Divider />
-						<Dropdown.Item value="divider">With divider</Dropdown.Item>
-					</Dropdown> */}
+					<h3 className="title is-4">{name}</h3>
+					<span></span>
 				</div>
 
 				<div className="subtitle is-6">{description}</div>
 			</Card.Content>
 			<Card.Footer>
-				<Card.Footer.Item>Yes</Card.Footer.Item>
+				{users.map(({ photoURL }) => (
+					<div className="footer-img">
+						<img src={photoURL} alt="" />
+					</div>
+				))}
 			</Card.Footer>
 		</Card>
 	);
