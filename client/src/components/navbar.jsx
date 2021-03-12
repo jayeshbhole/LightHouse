@@ -62,8 +62,8 @@ const Navbar = () => {
 				<NavLink to="/projects">Your Projects</NavLink>
 			</Route>
 
-			{!authUser[0] && (
-				<Route exact path="/">
+			{!authUser[0] ? (
+				<Route path="/">
 					<NavLink to="/kanban" className="nav-item">
 						Kanban
 					</NavLink>
@@ -71,13 +71,13 @@ const Navbar = () => {
 						MindMap
 					</NavLink>
 				</Route>
-			)}
+			) : null}
 
 			{authUser[0] ? (
 				<>
 					<img src={NotifBell} alt="" />
 					<div className="nav-item profile">
-						<img src={userData?.photoURL} alt="" srcset="" />
+						<img src={userData?.photoURL} alt="" />
 						<div className="dropdown">
 							<span onClick={logout}>Sign Out</span>
 							<span>Your Profile</span>
