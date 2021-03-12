@@ -1,0 +1,21 @@
+.app {
+  height: 100vh;
+}
+
+.app .page {
+  height: 100%;
+  width: 100%;
+  padding: 3rem;
+}
+
+.app .page .projects {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+/*# sourceMappingURL=App.css.map */

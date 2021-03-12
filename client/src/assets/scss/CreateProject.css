@@ -1,0 +1,41 @@
+.createproject {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.createproject form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 500px;
+  padding: 50px;
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.createproject .close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #fff;
+  border: 0;
+  font-size: 20px;
+  padding: 0 10px 0 10px;
+}
+
+.createproject input,
+.createproject textarea {
+  width: 100%;
+}
+
+.createproject .btnholder {
+  text-align: center;
+}
+/*# sourceMappingURL=CreateProject.css.map */

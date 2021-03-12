@@ -1,0 +1,76 @@
+.App {
+  height: 100vh;
+  max-width: 100vw;
+}
+
+.landing-container {
+  height: 100%;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-container .content {
+  padding-left: 3rem;
+  position: absolute;
+  top: 60%;
+  left: 45%;
+  overflow: hidden;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.landing-container .content h1 {
+  color: #585858;
+  font-weight: 600;
+  font-size: 1.3rem;
+  word-spacing: 0.95rem;
+}
+
+.landing-container .content h1 span {
+  color: #4f43a5;
+  font-weight: 700;
+  font-size: 2.4rem;
+}
+
+.landing-container .content ul {
+  list-style: none;
+}
+
+.landing-container .content ul li {
+  position: relative;
+  margin-left: 2rem;
+}
+
+.landing-container .content ul li div {
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  padding: 0.3rem 1rem;
+  width: 12ch;
+  background-color: #0539ed;
+  color: white;
+  z-index: 3;
+}
+
+.landing-container .content ul li div::before {
+  content: " ";
+  border-radius: 2rem;
+  background-color: #96acf6;
+  height: 2.1rem;
+  width: 14ch;
+  -webkit-transform: translateX(-1rem);
+          transform: translateX(-1rem);
+  position: absolute;
+  top: -0.5rem;
+  left: -0.5rem;
+  z-index: -1;
+}
+
+.landing-container .lighthouse {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: -1;
+}
+/*# sourceMappingURL=landing.css.map */

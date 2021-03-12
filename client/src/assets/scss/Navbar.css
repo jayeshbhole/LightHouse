@@ -1,0 +1,94 @@
+nav {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  color: #818181;
+  -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.123);
+          box-shadow: 0 3px 10px rgba(0, 0, 0, 0.123);
+  height: 60px;
+}
+
+nav .navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 95%;
+  margin: auto;
+  height: 100%;
+}
+
+nav .start,
+nav .end {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+nav a {
+  color: #818181;
+  text-decoration: none;
+}
+
+nav .brand,
+nav .brand img {
+  height: 100%;
+}
+
+nav .nav-item {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 0.5rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+nav .start .nav-item:hover {
+  background-color: #f5f5f5;
+}
+
+nav .profile img {
+  border-radius: 50%;
+  height: 80%;
+}
+
+nav .dropdown {
+  position: relative;
+}
+
+nav .dropdown .dropdown-box {
+  display: none;
+  position: absolute;
+  min-width: 150px;
+  right: 0;
+  background: #fff;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  top: 60px;
+}
+
+nav .dropdown .dropdown-box a {
+  padding: 5px 20px;
+  display: block;
+}
+
+nav .dropdown:hover .dropdown-box {
+  display: block;
+}
+
+nav .dropdown:hover .dropdown-box a:hover {
+  background-color: #f5f5f5;
+}
+/*# sourceMappingURL=Navbar.css.map */

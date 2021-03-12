@@ -1,0 +1,66 @@
+.kanban {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.kanban .col {
+  -ms-flex-preferred-size: 20%;
+      flex-basis: 20%;
+  margin: 0.75rem 1.5rem;
+  height: 100%;
+}
+
+.kanban .col h3 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #ff6584;
+}
+
+.kanban .col .card {
+  position: relative;
+  min-width: 25ch;
+  margin: 1rem 0;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  color: #8b92bb;
+}
+
+.kanban .col .card h4 {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: #677097;
+}
+
+.kanban .col .card .date {
+  display: block;
+  font-size: 0.7rem;
+}
+
+.kanban .col .card::after {
+  content: "";
+  border-radius: 0 0.5rem 0.5rem 0;
+  background-color: #a6d4ff;
+  width: 0.35rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.kanban .col .card.mid::after {
+  background-color: #ffdba6;
+}
+
+.kanban .col .card.high::after {
+  background-color: #fe9a9a;
+}
+/*# sourceMappingURL=kanban.css.map */
