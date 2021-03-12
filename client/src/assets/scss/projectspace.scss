@@ -25,6 +25,9 @@
 			&:hover {
 				cursor: pointer;
 			}
+			&:focus {
+				outline: none;
+			}
 		}
 		svg {
 			margin: 1.5rem 3rem;
