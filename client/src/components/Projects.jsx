@@ -12,7 +12,7 @@ const Projects = () => {
 		<div className="page">
 			<h4 className="title is-3 ">Projects</h4>
 			<div className="projects">
-				<div className="projectcard">
+				<div className="projectcard" onClick={() => settoggle(!toggle)}>
 					<div className="body">
 						<div className="is-flex">
 							<h3 className="title is-4">New Project</h3>
