@@ -1,0 +1,46 @@
+.hero {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: row;
+	background-color: #ececec;
+	.lhs {
+		width: 44%;
+		padding: 8rem;
+		.tag-line {
+			font-size: 1.2rem;
+			text-transform: uppercase;
+			letter-spacing: 0.3rem;
+			font-weight: 300;
+			color: rgba($color: #182661, $alpha: 0.7);
+			margin-bottom: 1.6rem;
+		}
+		.title {
+			font-size: 3.5rem;
+			color: #3d4a90;
+			.high {
+				color: #ff6584;
+			}
+			margin-bottom: 2.5rem;
+		}
+		.cta {
+			width: 18rem;
+			height: 5rem;
+			border-radius: 1rem;
+			border: none;
+			background-color: #7e60ee;
+			color: white;
+			font-size: 1.75rem;
+			font-family: "Poppins", sans-serif;
+			font-weight: 600;
+			box-shadow: 1px 1px 10px 1px rgba($color: #000000, $alpha: 0.5);
+		}
+	}
+	.rhs {
+		width: 56%;
+		img {
+			margin-top: 9.5rem;
+			width: 65rem;
+		}
+	}
+}

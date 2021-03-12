@@ -14,23 +14,74 @@
 		width: 500px;
 		padding: 50px;
 		background-color: #fff;
-		border-radius: 5px;
+		border-radius: 1rem;
 	}
 	.close {
 		position: absolute;
-		top: 5px;
-		right: 5px;
+		top: 1.5rem;
+		right: 1.5rem;
 		background: #fff;
 		border: 0;
-		font-size: 20px;
 		padding: 0 10px 0 10px;
-		// border-radius: 20px;
+		svg {
+			fill: #ff6584;
+		}
 	}
-	input,
-	textarea {
-		width: 100%;
-	}
-	.btnholder {
-		text-align: center;
+	.content {
+		padding: auto;
+		h4 {
+			text-align: center;
+			font-size: 1.5rem;
+			color: #7e60ee;
+		}
+		.title {
+			width: 90%;
+			padding: 1rem;
+			background-color: #fff;
+			border-radius: 0.5rem;
+			label {
+				padding-bottom: 0.5rem;
+				font-size: 1rem;
+				color: #6e6e6e;
+			}
+			input {
+				width: 95%;
+				padding: 0.5rem;
+				border: none;
+				border-radius: 0.25rem;
+				background-color: #f0f0f0;
+			}
+		}
+		.desc {
+			width: 90%;
+			padding: 1rem;
+			background-color: #fff;
+			border-radius: 0.5rem;
+			label {
+				font-size: 1rem;
+				color: #6e6e6e;
+			}
+			textarea {
+				width: 95%;
+				padding: 0.5rem;
+				border: none;
+				border-radius: 0.25rem;
+				background-color: #f0f0f0;
+			}
+		}
+		.btnholder {
+			text-align: center;
+			button {
+				font-size: 1rem;
+				width: 5rem;
+				height: 2rem;
+				border: none;
+				background-color: #7e60ee;
+				color: white;
+				font-weight: 500;
+				border-radius: 0.25rem;
+				box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.3);
+			}
+		}
 	}
 }
