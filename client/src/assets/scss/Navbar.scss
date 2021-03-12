@@ -16,61 +16,97 @@ nav {
 		width: 95%;
 		margin: auto;
 		height: 100%;
-	}
-	.start,
-	.end {
-		display: flex;
-		height: 100%;
-	}
-
-	a {
-		color: $text;
-		text-decoration: none;
-	}
-	.brand,
-	.brand img {
-		height: 100%;
-	}
-	.nav-item {
-		height: 100%;
-		display: flex;
-		align-items: center;
-		padding: 0 0.5rem;
-		font-size: 1.2rem;
-		cursor: pointer;
-	}
-
-	.start .nav-item:hover {
-		background-color: #f5f5f5;
-	}
-
-	.profile img {
-		border-radius: 50%;
-		height: 80%;
-	}
-
-	.dropdown {
-		position: relative;
-		.dropdown-box {
-			display: none;
-			position: absolute;
-			min-width: 150px;
-			right: 0;
-			background: #fff;
-			box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-			border-radius: 5px;
-			top: 60px;
-			a {
-				padding: 5px 20px;
-				display: block;
-			}
+		a {
+			color: $text;
+			text-decoration: none;
 		}
-	}
+		.start,
+		.end {
+			display: flex;
+			height: 100%;
+		}
+		.nav-item {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			padding: 0 0.5rem;
+			font-size: 1.2rem;
+			cursor: pointer;
+			position: relative;
+			text-align: center;
 
-	.dropdown:hover .dropdown-box {
-		display: block;
-		a:hover {
-			background-color: #f5f5f5;
+			img {
+				height: 2rem;
+				width: auto;
+				border-radius: 50%;
+			}
+
+			&.brand img {
+				padding-top: 0.5rem;
+				height: 3rem !important;
+			}
+
+			&:not(.brand):not(.profile):not(.bell)::after {
+				position: absolute;
+				bottom: 0.5rem;
+				left: 50%;
+				transform: translateX(-50%);
+				content: "";
+				display: block;
+				height: 0.2rem;
+				background-color: #7e60ed;
+				opacity: 0;
+				width: 0;
+				border-radius: 99px;
+				transition: all 0.1s ease-in-out;
+			}
+
+			&:not(.brand):not(.profile):not(.bell):hover::after {
+				width: 80% !important;
+				opacity: 0.9;
+			}
+
+			&.bell {
+				img {
+					height: 1.8rem;
+				}
+				&.unseen::after {
+					content: "";
+					height: 10px;
+					width: 10px;
+					position: absolute;
+					top: 12px;
+					right: 10px;
+					left: auto;
+					bottom: auto;
+					border-radius: 100%;
+					background-color: red;
+				}
+			}
+			&.dropdown {
+				position: relative;
+				font-size: 1rem;
+				.dropdown-box {
+					display: none;
+					position: absolute;
+					min-width: 150px;
+					right: 0;
+					background: #fff;
+					box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+					border-radius: 5px;
+					top: 60px;
+					a {
+						padding: 5px 20px;
+						display: block;
+					}
+				}
+				&:hover .dropdown-box {
+					display: block;
+					a:hover {
+						background-color: #f5f5f5;
+					}
+				}
+			}
 		}
 	}
 }
