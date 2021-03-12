@@ -27,8 +27,6 @@ const App = () => {
 			<BrowserRouter>
 				<Navbar />
 				<Switch>
-					<Route exact path="/" component={() => <Home />}></Route>
-
 					{/* Paths for authenticated user */}
 					{isLoggedIn && <Route exact path="/projects" component={Projects} />}
 					{isLoggedIn && (
@@ -37,7 +35,10 @@ const App = () => {
 
 					{/* Unauthorised */}
 					<Route exact path="/login" component={Login} />
-					{!isLoading && !isLoggedIn && <Redirect to="/login" />}
+
+					{!!isLoggedIn ? <Redirect to="/projects" /> : null}
+
+					<Route path="/" component={() => <Home />} />
 				</Switch>
 			</BrowserRouter>
 		</div>
