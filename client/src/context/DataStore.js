@@ -7,7 +7,7 @@ const DataStore = createContext({
 	authUser: null,
 	userData: null,
 	projects: null,
-	notifications: null,
+	notifications: [],
 	db: db,
 	logout: () => {},
 	getProject: () => {},
