@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Route, useParams, Switch, useRouteMatch } from "react-router-dom";
 import { DataStore } from "../context/DataStore";
 import { useDocumentData } from "react-firebase-hooks/firestore";
@@ -14,6 +14,8 @@ const ProjectSpace = () => {
 		db.doc(`projects/${projectID}`)
 	);
 
+	const [toggle, setToggle] = useState(false);
+
 	return (
 		<Switch>
 			<Route
@@ -25,20 +27,28 @@ const ProjectSpace = () => {
 				exact
 				path=""
 				component={() =>
-					project ? <ProjectTab project={project} /> : "loading project"
+					project ? (
+						<ProjectTab project={project} isMenu={toggle} toggler={setToggle} />
+					) : (
+						"loading project"
+					)
 				}
 			/>
 		</Switch>
 	);
 };
 
-const ProjectTab = ({ project: { name, description, users, cards } }) => {
+const ProjectTab = ({
+	project: { name, description, users, cards },
+	isMenu,
+	toggler,
+}) => {
 	return (
 		<div className="page project-space">
 			<div className="tab">
 				<div className="top-bar">
 					<h1 className="title">{name}</h1>
-					<button>
+					<button onClick={() => toggler(!isMenu)}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="30"
@@ -76,16 +86,22 @@ const ProjectTab = ({ project: { name, description, users, cards } }) => {
 						</div>
 					</div>
 					<div className="right-bar">
-						<h2 className="title">Upcoming Tasks</h2>
-						<ul>
-							{cards.map((title, deadline, id) => {
-								return (
-									<li key={id}>
-										<TaskCard name={title} date={deadline} />
-									</li>
-								);
-							})}
-						</ul>
+						{isMenu ? (
+							<OptionMenu />
+						) : (
+							<>
+								<h2 className="title">Upcoming Tasks</h2>
+								<ul>
+									{cards.map(({title, deadline, id}) => {
+										return (
+											<li key={id}>
+												<TaskCard name={title} date={deadline} />
+											</li>
+										);
+									})}
+								</ul>
+							</>
+						)}
 					</div>
 				</div>
 			</div>
@@ -98,6 +114,59 @@ const TaskCard = (name, date) => {
 		<div className="card">
 			<h5 className="title">{name}</h5>
 			<span className="date">{date}</span>
+		</div>
+	);
+};
+
+const UpcomingTasks = () => {};
+
+const OptionMenu = () => {
+	return (
+		<div className="menu">
+			<div className="menu-row rename-option">
+				<label htmlFor="rename">Rename Project</label>
+				<br />
+				<input type="text" id="rename" name="rename" placeholder="" />
+			</div>
+			<div className="menu-row desc-option">
+				<label htmlFor="edit-desc">Edit Description</label>
+				<br />
+				<input type="text" id="edit-desc" name="edit-desc" placeholder="" />
+			</div>
+			<div className="menu-row collaborators-option">
+				<div className="collaborator">
+					<div className="profile">
+						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
+					</div>
+					<div className="access-select">
+						<select name="access" id="access"></select>
+					</div>
+				</div>
+				<div className="collaborator">
+					<div className="profile">
+						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
+					</div>
+					<div className="access-select">
+						<select name="access" id="access"></select>
+					</div>
+				</div>
+				<div className="collaborator">
+					<div className="profile">
+						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
+					</div>
+					<div className="access-select">
+						<select name="access" id="access"></select>
+					</div>
+				</div>
+				<div className="collaborator">
+					<div className="profile">
+						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
+					</div>
+					<div className="access-select">
+						<select name="access" id="access"></select>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

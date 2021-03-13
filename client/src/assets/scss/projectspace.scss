@@ -12,6 +12,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		position: relative;
 		h1 {
 			font-size: 1.75rem;
 			margin: 1.5rem 3rem;
@@ -27,6 +28,11 @@
 			}
 			&:focus {
 				outline: none;
+			}
+
+			.menu {
+				position: absolute;
+				top: 100%;
 			}
 		}
 		svg {
@@ -95,6 +101,61 @@
 				color: #886eef;
 				font-weight: 400;
 				padding: 4rem;
+			}
+
+			.menu {
+				width: auto;
+				height: auto;
+				display: flex;
+				padding: 48px;
+
+				flex-wrap: wrap;
+
+				.menu-row {
+					width: 100%;
+					margin: 10px;
+					input {
+						
+						min-height: 100px;
+						width: 100%;
+						border-radius: 10px;
+					}
+				}
+
+				.rename-option {
+					height: 15%;
+				}
+
+				.desc-option {
+					height: 30%;
+				}
+
+				.collaborators-option {
+					
+
+					.collaborator {
+						width: 100%;
+						display: flex;
+						justify-content: space-between;
+						align-content: space-between;
+						
+
+						.profile {
+							
+						}
+
+						.access-select {
+							display: flex;
+							justify-content: center;
+							align-items: center;
+
+							select {
+								height: fit-content;
+							}
+						}
+					}
+					
+				}
 			}
 		}
 	}
