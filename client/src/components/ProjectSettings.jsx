@@ -19,7 +19,7 @@ const ProjectSettings = (project) => {
 		db.doc("notifications/" + email).update({
 			notifications: firebase.firestore.FieldValue.arrayUnion({
 				type: "invite",
-				title: `${userdata.email} invited you to ${project.name}`,
+				title: `${userData.email} invited you to ${project.name}`,
 				project: project.id,
 			}),
 		});

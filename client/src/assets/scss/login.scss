@@ -1,12 +1,31 @@
 .login-card {
 	margin: auto;
+	background-color: white;
 	border-radius: 0.75rem;
 	width: fit-content;
-	padding: 100px;
+	padding: 5rem;
 	flex-direction: column;
 	display: flex;
 	align-items: center;
+	h1 {
+		font-size: 1.7rem;
+		color: #2f3657;
+	}
 	button {
+		border: none;
 		margin: 10px;
+		padding: 1rem 2rem;
+		width: 90%;
+		font-size: 1rem;
+		border-radius: 0.5rem;
+		font-weight: 500;
+		color: white;
+		cursor: pointer;
+		&#google {
+			background-color: #7e60ee;
+		}
+		&#github {
+			background-color: rgb(9, 9, 31);
+		}
 	}
 }
