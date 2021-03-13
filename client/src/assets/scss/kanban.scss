@@ -2,7 +2,7 @@
 	display: flex;
 	width: 100%;
 	height: 100%;
-	justify-content: center;
+	justify-content: space-evenly;
 
 	.col {
 		flex-basis: 20%;
@@ -24,6 +24,7 @@
 			padding: 0.8rem;
 			border-radius: 0.5rem;
 			color: #8b92bb;
+			background-color: white;
 
 			h4 {
 				font-weight: 600;

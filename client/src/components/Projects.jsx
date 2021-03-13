@@ -1,8 +1,9 @@
+import "../assets/scss/projects.scss";
+
 import { useContext, useState } from "react";
 import ProjectCard from "./Projectcard";
 import CreateProject from "./CreateProject";
 import { DataStore } from "../context/DataStore";
-import "../assets/scss/projects.scss";
 
 const Projects = () => {
 	const { userData } = useContext(DataStore);
@@ -11,15 +12,15 @@ const Projects = () => {
 	return (
 		<div className="page">
 			<div className="projects">
-				<div className="projectcard" onClick={() => settoggle(!toggle)}>
+				<div
+					className="projectcard"
+					id="create-project"
+					onClick={() => settoggle(!toggle)}>
 					<div className="body">
-						<div className="is-flex">
-							<h3 className="title is-4">New Project</h3>
+						<div>
+							<h3 className="title ">New Project</h3>
 						</div>
-						<div className="subtitle is-6">Create A new project</div>
-					</div>
-					<div className="footer">
-						<span>Say YES to productivity</span>
+						<div className="subtitle">Create A new project</div>
 					</div>
 				</div>
 				{toggle ? <CreateProject close={() => settoggle(false)} /> : null}

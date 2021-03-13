@@ -48,6 +48,10 @@ nav {
 				height: 3rem !important;
 				padding-right: 0.5rem;
 			}
+			&:not(.brand):not(.profile):not(.bell) .active {
+				font-weight: 600;
+				color: #6c58b4;
+			}
 
 			&:not(.brand):not(.profile):not(.bell)::after {
 				position: absolute;
@@ -103,6 +107,7 @@ nav {
 					a {
 						padding: 5px 20px;
 						display: block;
+						border-radius: 5px;
 					}
 				}
 				&:hover .dropdown-box {

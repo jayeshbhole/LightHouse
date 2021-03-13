@@ -10,17 +10,12 @@ const CreateProject = ({ close }) => {
 		description: "",
 	});
 
-	let disabled = "";
-	const handleChange = (e) => {
-		if (e.target.value.length > 0) {
-			disabled = "true";
-		} else {
-			disabled = "false";
-		}
-	};
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (data.name.length == 0) {
+			return;
+		}
+
 		db.collection("projects")
 			.add({
 				name: data.name,
@@ -79,8 +74,8 @@ const CreateProject = ({ close }) => {
 							name="name"
 							id="name"
 							placeholder="Title of the Project"
-							onChange={handleChange}
 							onChange={(e) => setData({ ...data, name: e.target.value })}
+							required
 						/>
 					</div>
 					<div className="desc">
@@ -94,7 +89,7 @@ const CreateProject = ({ close }) => {
 							}></textarea>
 					</div>
 					<div className="btnholder">
-						<button name="submit" type="submit" disabled={disabled}>
+						<button name="submit" type="submit">
 							Create
 						</button>
 					</div>
