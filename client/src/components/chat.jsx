@@ -6,6 +6,10 @@ const Chat = ({ project }) => {
 	const { userData, db, firebase } = useContext(DataStore);
 	const [msg, setMsg] = useState("");
 	const [msgs, setMsgs] = useState([]);
+	const userObj = {};
+	project?.users.forEach((u) => {
+		userObj[u.email] = u.photoURL;
+	});
 	useEffect(() => {
 		let unsub = db
 			.doc(`projects/${project.id}/extras/chat`)
@@ -32,13 +36,13 @@ const Chat = ({ project }) => {
 	};
 	return (
 		<div className="page project-space">
-			<div className="tab">
+			<div className="tab chat-tab">
 				<div className="top-bar">
 					<h1 className="title">Team Chat</h1>
 				</div>
 				<main className="msger-chat">
 					{msgs?.map((m, index) => (
-						<Msg msg={m} key={index} userData={userData} />
+						<Msg msg={m} key={index} userData={userData} userObj={userObj} />
 					))}
 				</main>
 				<div className="bod">
@@ -50,6 +54,7 @@ const Chat = ({ project }) => {
 								placeholder="Enter your message..."
 								value={msg}
 								onChange={(e) => setMsg(e.target.value)}
+								required
 							/>
 							<button type="submit" className="msger-send-btn">
 								Send<i className="fa fa-paper-plane" aria-hidden="true"></i>
@@ -67,13 +72,13 @@ const toDate = (time) => {
 	return `${date[2]} ${date[1]} ${date[3]} ${date[4]}`;
 };
 
-const Msg = ({ msg, userData }) => {
+const Msg = ({ msg, userData, userObj }) => {
 	const check = msg.sender == userData.email;
 	return (
 		<main className="msger-chat">
 			<div className={check ? "msg right-msg" : "msg left-msg"}>
 				<div className="msg-img">
-					<img src={check ? userData.photoURL : null} alt="" />
+					<img src={userObj[msg.sender]} alt="" />
 				</div>
 
 				<div className="msg-bubble">

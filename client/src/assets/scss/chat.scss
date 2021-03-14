@@ -1,3 +1,6 @@
+.chat-tab{
+    max-height: 85%;
+}
 .send{
     width:100%;
     .msger-inputarea {
@@ -64,7 +67,7 @@
   }
   .msg-bubble {
     max-width: 450px;
-    padding: 15px;
+    padding: 10px 15px;
     border-radius: 15px;
     background: #eee;
   }
@@ -72,7 +75,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   .msg-info-name {
     margin-right: 10px;
