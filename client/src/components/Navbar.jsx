@@ -102,7 +102,19 @@ const Navbar = () => {
 									notifications?.length ? "unseen" : null
 								} dropdown`}>
 								<img src={NotifBell} alt="" />
-								<div className="dropdown-box"></div>
+								<div className="dropdown-box">
+									<div className="notification">
+										<div className="notif-text">Hello</div>
+										<div className="notif-actions">
+											<button>
+												<i class="gg-check-r"></i>
+											</button>
+											<button>
+												<i class="gg-close-r"></i>
+											</button>
+										</div>
+									</div>
+								</div>
 							</span>
 							<span className="nav-item profile dropdown">
 								<img src={userData?.photoURL} alt="" />
