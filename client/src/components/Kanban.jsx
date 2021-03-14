@@ -85,6 +85,9 @@ const Kanban = ({ project, db }) => {
 						</Droppable>
 					);
 				})}
+				<div className="add-card">
+					<i className="gg-add-r"></i>
+				</div>
 			</div>
 		</DragDropContext>
 	);

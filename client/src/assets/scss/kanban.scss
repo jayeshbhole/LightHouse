@@ -1,9 +1,23 @@
+@import url('https://css.gg/add-r.css');
+
 .kanban.page {
 	padding: 2rem 0;
 	display: flex;
 	justify-content: space-evenly;
 	position: relative;
 
+	.add-card {
+		position: fixed;
+		bottom: 100px;
+		width: 50px;
+		height: 50px;
+		border-radius: 10px;
+		background-color: #8b92bb;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		
+	}
 	.col {
 		flex-basis: 35ch;
 		height: 85%;
