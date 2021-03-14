@@ -138,7 +138,7 @@ const OptionMenu = ({ project }) => {
 	});
 	const [invite, setInvite] = useState(false);
 
-	const isowner = project.owner == userData.email;
+	const isowner = project.owner === userData.email;
 	const history = useHistory();
 
 	const handleSave = (e) => {
