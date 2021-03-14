@@ -17,6 +17,10 @@ const Chat = ({ project }) => {
 			.onSnapshot((doc) => {
 				if (doc.exists) {
 					setMsgs(doc.data().msg);
+				} else {
+					db.doc(`projects/${project.id}/extras/chat`).set({
+						msg: [],
+					});
 				}
 				ref && ref.current.scrollTo(0, ref.current.scrollHeight);
 			});
