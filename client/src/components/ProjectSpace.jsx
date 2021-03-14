@@ -86,7 +86,7 @@ const ProjectTab = ({ project, toggle, setToggle }) => {
 									return member.name ? (
 										<li key={id}>
 											<p className="body">{member.name}</p>
-											<img src={member.photoURL} alt={member.name} />
+											<img src={member.photoURL} alt="" />
 										</li>
 									) : null;
 								})}
@@ -237,7 +237,7 @@ const Collaborator = ({ user, project, isowner }) => {
 					<i className="gg-user"></i>
 				)}
 				<span>{user.name ? user.name : user.email}</span>
-				<span>({user.status})</span>
+				<span style={{ marginLeft: "auto" }}>({user.status})</span>
 			</div>
 			<div className="status">
 				{user.status !== "owner" &&

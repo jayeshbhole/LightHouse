@@ -89,7 +89,9 @@ const Kanban = ({ project, db }) => {
 				})}
 				<div className="add-card" onClick={() => settoggle(true)}>
 					<div>
-						<i className="gg-add-r"></i>
+						<i
+							className="gg-add-r"
+							style={{ borderRadius: 50, color: "white" }}></i>
 					</div>
 				</div>
 				{toggle ? <CreateCard close={() => settoggle(false)} /> : null}
