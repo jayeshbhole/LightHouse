@@ -12,7 +12,7 @@ const CreateProject = ({ close }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (data.name.length == 0) {
+		if (data.name.length === 0) {
 			return;
 		}
 

@@ -6,7 +6,7 @@ import "../assets/scss/projectspace.scss";
 
 const ProjectSpace = () => {
 	const { projectID } = useParams();
-	const { projects, project, setProject } = useContext(DataStore);
+	const { projects, project, setProject, db } = useContext(DataStore);
 	const { url } = useRouteMatch();
 	const [toggle, setToggle] = useState(false);
 
@@ -21,7 +21,7 @@ const ProjectSpace = () => {
 				exact
 				path={`${url}/kanban`}
 				component={() =>
-					project ? <Kanban project={project} /> : "Loading Project!"
+					project ? <Kanban project={project} db={db} /> : "Loading Project!"
 				}
 			/>
 			<Route

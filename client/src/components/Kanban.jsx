@@ -1,10 +1,14 @@
-import { DragDropContext } from "react-beautiful-dnd";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { useState, useEffect } from "react";
 import "../assets/scss/kanban.scss";
 
-const Kanban = ({ project }) => {
+const Kanban = ({ project, db }) => {
 	const [cols, setCols] = useState({ todo: [], inpro: [], done: [] });
-
+	const placeHolders = [
+		{ key: "todo", name: "To Do" },
+		{ key: "inpro", name: "In Progress" },
+		{ key: "done", name: "Done" },
+	];
 	useEffect(() => {
 		const cards = Object.values(project?.cards || {});
 		if (cards) {
@@ -14,59 +18,75 @@ const Kanban = ({ project }) => {
 		}
 	}, [project?.cards]);
 
-	useEffect(() => {
-		console.log(cols);
-	}, [cols]);
-
 	const toDate = (deadline) => {
 		const date = deadline?.toDate().toString().split(" ");
 		return `${date[2]} ${date[1]} ${date[3]}`;
 	};
+	const handleDragEnd = (result) => {
+		console.log(result);
+
+		if (result.destination === result.source || !result.destination) return;
+
+		const tempCard = {};
+		tempCard[`cards.${result.draggableId}.status`] =
+			result.destination.droppableId;
+		const tempCols = cols;
+		// Col -> colName -> index -> remove
+		const droppedCard =
+			tempCols[`${result.source.droppableId}`][`${result.source.index}`];
+
+		tempCols[`${result.source.droppableId}`].splice(result.source.index);
+		tempCols[`${result.destination.droppableId}`].splice(
+			result.destination.index,
+			result.destination.index - 1,
+			droppedCard
+		);
+		setCols(tempCols);
+		db.doc(`projects/${project.id}`).update({
+			...tempCard,
+		});
+	};
+
 	return (
-		<DragDropContext>
+		<DragDropContext onDragEnd={handleDragEnd}>
 			<div className="kanban page">
-				<div className="col">
-					<h3>To Do</h3>
-					<div className="cards">
-						{cols.todo.map((card, id) => {
-							return (
-								<div key={id} className={`card ${card.priority}`}>
-									<h4>{card.title}</h4>
-									<div className="desc">{card.desc}</div>
-									<span className="date">{toDate(card.deadline)}</span>
+				{placeHolders.map(({ key, name }) => {
+					return (
+						<Droppable droppableId={`${key}`}>
+							{(provided) => (
+								<div
+									className="col"
+									{...provided.droppableProps}
+									ref={provided.innerRef}>
+									<h3>{name}</h3>
+									{provided.placeholder}
+
+									{cols[key].map(
+										({ id, title, priority, desc, deadline }, index) => {
+											return (
+												<Draggable draggableId={id} key={id} index={index}>
+													{(provided) => {
+														return (
+															<div
+																className={`card ${priority}`}
+																{...provided.draggableProps}
+																ref={provided.innerRef}
+																{...provided.dragHandleProps}>
+																<h4>{title}</h4>
+																<div className="desc">{desc}</div>
+																<span className="date">{toDate(deadline)}</span>
+															</div>
+														);
+													}}
+												</Draggable>
+											);
+										}
+									)}
 								</div>
-							);
-						})}
-					</div>
-				</div>
-				<div className="col">
-					<h3>In Progress</h3>
-					<div className="cards">
-						{cols.inpro.map((card, id) => {
-							return (
-								<div key={id} className={`card ${card.priority}`}>
-									<h4>{card.title}</h4>
-									<div className="desc">{card.desc}</div>
-									<span className="date">{toDate(card.deadline)}</span>
-								</div>
-							);
-						})}
-					</div>
-				</div>
-				<div className="col">
-					<h3>Done</h3>
-					<div className="cards">
-						{cols.done.map((card, id) => {
-							return (
-								<div key={id} className={`card ${card.priority}`}>
-									<h4>{card.title}</h4>
-									<div className="desc">{card.desc}</div>
-									<span className="date">{toDate(card.deadline)}</span>
-								</div>
-							);
-						})}
-					</div>
-				</div>
+							)}
+						</Droppable>
+					);
+				})}
 			</div>
 		</DragDropContext>
 	);
