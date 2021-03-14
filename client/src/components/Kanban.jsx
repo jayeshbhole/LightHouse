@@ -25,7 +25,13 @@ const Kanban = ({ project, db }) => {
 		return `${date[2]} ${date[1]} ${date[3]}`;
 	};
 	const handleDragEnd = (result) => {
-		if (result.destination === result.source || !result.destination) return;
+		if (
+			!result.destination ||
+			result.destination.droppableId === result.source.droppableId
+		) {
+			setCols(cols);
+			return;
+		}
 
 		const tempCard = {};
 		tempCard[`cards.${result.draggableId}.status`] =
@@ -55,7 +61,7 @@ const Kanban = ({ project, db }) => {
 						<Droppable droppableId={`${key}`} key={key}>
 							{(provided) => (
 								<div
-									className="col"
+									className={`col ${key}`}
 									{...provided.droppableProps}
 									ref={provided.innerRef}>
 									<h3>{name}</h3>
@@ -82,6 +88,7 @@ const Kanban = ({ project, db }) => {
 											);
 										}
 									)}
+									{provided.placeholder}
 								</div>
 							)}
 						</Droppable>

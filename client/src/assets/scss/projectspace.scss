@@ -128,14 +128,15 @@
 					margin: 0.75rem;
 					input,
 					textarea {
-						font-size: 1.2em;
+						font-size: 1.1rem;
 						padding: 5px 10px;
 						width: 100%;
 						border-radius: 10px;
 						&:focus {
 							outline: none;
 						}
-						border: none;
+						background-color: #f5f5f5;
+						border: 2px solid #adadad80;
 					}
 				}
 				.btnholder {
@@ -168,26 +169,29 @@
 
 				.desc-option {
 					height: 30%;
+					textarea {
+						font-family: "Poppins", sans-serif;
+					}
 				}
 
 				.collaborators-option {
 					button {
-							font-size: .75rem;
-							padding: 0 20px;
-							border: none;
-							min-height: 30px;
-							background-color: #7e60ee;
-							color: white;
-							font-weight: 500;
-							border-radius: 0.25rem;
-							&:focus {
-								outline: none;
-							}
-							&:hover {
-								cursor: pointer;
-							}
-							box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.199);
+						font-size: 0.75rem;
+						padding: 0 20px;
+						border: none;
+						min-height: 30px;
+						background-color: #7e60ee;
+						color: white;
+						font-weight: 500;
+						border-radius: 0.25rem;
+						&:focus {
+							outline: none;
 						}
+						&:hover {
+							cursor: pointer;
+						}
+						box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.199);
+					}
 					.collaborator {
 						margin-top: 1rem;
 						margin-bottom: 1rem;
@@ -220,9 +224,8 @@
 								transform: translateY(2px);
 							}
 						}
-						
-
-						.profile {
+						.profile,
+						form {
 							display: flex;
 							align-items: center;
 							height: 40px;

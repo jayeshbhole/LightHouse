@@ -271,21 +271,32 @@ const NewCollaborator = ({ cancel }) => {
 	};
 	return (
 		<div className="collaborator">
-			<div className="profile">
-				<i className="gg-user-add"></i>
-				<span>
+			<div className="profile" style={{}}>
+				<form onSubmit={handleInvite}>
+					<i className="gg-user-add"></i>
+
 					<input
 						type="email"
 						name="email"
 						onChange={(e) => setEmail(e.target.value)}
+						style={{
+							margin: "0 15px",
+							border: "2px solid #7e60ed",
+							borderRadius: ".5rem",
+							fontSize: "1rem",
+						}}
+						placeholder="Email of Collaborator"
 					/>
-					<button onClick={handleInvite} disabled={email === ""}>
+					<button
+						type="submit"
+						disabled={email === ""}
+						style={{ marginRight: ".5rem" }}>
 						Invite
 					</button>
-					<button className="danger" onClick={cancel}>
+					<button className="danger" type="reset" onClick={cancel}>
 						<i className="gg-close"></i>
 					</button>
-				</span>
+				</form>
 			</div>
 		</div>
 	);
