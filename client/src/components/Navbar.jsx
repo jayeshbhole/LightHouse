@@ -6,44 +6,49 @@ import { DataStore } from "../context/DataStore";
 import "../assets/scss/Navbar.scss";
 
 const Navbar = () => {
-	const { authUser, notifications, db, userData, logout, project } = useContext(
-		DataStore
-	);
+	const {
+		authUser,
+		notifications,
+		db,
+		userData,
+		logout,
+		project,
+		firebase,
+	} = useContext(DataStore);
 
-	const accept = (projectId) => {
-		let index = -1;
-		db.doc("projects" + projectId)
-			.get()
-			.then((doc) => {
-				if (doc.exists) {
-					db.doc("projects" + projectId).update({
-						users:
-							doc.data().users.filter((user) => user.email !== userData.email) +
-							[
-								{
-									email: userData.email,
-									name: userData.name,
-									photoURL: userData.photoURL,
-									status: "member",
-								},
-							],
-					});
-				}
-			});
+	if (!userData) return <div>loading</div>;
+
+	const u = {
+		email: userData.email,
+		status: "invited",
 	};
-	const reject = (projectId) => {
-		let index = -1;
-		db.doc("projects" + projectId)
-			.get()
-			.then((doc) => {
-				if (doc.exists) {
-					db.doc("projects" + projectId).update({
-						users: doc
-							.data()
-							.users.filter((user) => user.email !== userData.email),
-					});
-				}
-			});
+
+	const accept = (n) => {
+		db.doc("projects/" + n.project).update({
+			usersemail: firebase.firestore.FieldValue.arrayUnion(userData.email),
+			users: firebase.firestore.FieldValue.arrayUnion({
+				email: userData.email,
+				status: "member",
+				photoURL: userData.photoURL,
+				name: userData.name,
+			}),
+		});
+		db.doc("projects/" + n.project).update({
+			users: firebase.firestore.FieldValue.arrayRemove(u),
+		});
+		clearnotif(n);
+	};
+	const reject = (n) => {
+		db.doc("projects/" + n.project).update({
+			users: firebase.firestore.FieldValue.arrayRemove(u),
+		});
+		clearnotif(n);
+	};
+
+	const clearnotif = (n) => {
+		db.doc("notifications/" + userData.email).update({
+			notifications: firebase.firestore.FieldValue.arrayRemove(n),
+		});
 	};
 
 	return (
@@ -102,21 +107,26 @@ const Navbar = () => {
 									notifications?.length ? "unseen" : null
 								} dropdown`}>
 								<img src={NotifBell} alt="" />
-								<div className="dropdown-box">
-									{notifications.map((notif) => {
-										return (
-											<div className="notification">
-												<div className="notif-text">{notif.title}</div>
-												<div className="notif-actions">
-													<button>
-														<i class="gg-check"></i>
-													</button>
-													<button>
-														<i class="gg-close"></i>
-													</button>
+								<div className="n-box dropdown-box">
+									{notifications?.map((n, index) => {
+										if (n.type == "invite")
+											return (
+												<div className="notification" key={index}>
+													<div className="notif-text">{n.title}</div>
+													<div className="notif-actions">
+														<button
+															className="accept"
+															onClick={() => accept(n)}>
+															<i className="gg-check"></i>
+														</button>
+														<button
+															className="reject"
+															onClick={() => reject(n)}>
+															<i className="gg-close"></i>
+														</button>
+													</div>
 												</div>
-											</div>
-										);
+											);
 									})}
 								</div>
 							</span>
