@@ -174,9 +174,38 @@
 						justify-content: space-between;
 						align-content: space-between;
 						padding: 5px;
+
+						button {
+							font-size: 1rem;
+							padding: 0 20px;
+							border: none;
+							min-height: 30px;
+							background-color: #7e60ee;
+							color: white;
+							font-weight: 500;
+							border-radius: 0.25rem;
+							&:focus {
+								outline: none;
+							}
+							&:hover {
+								cursor: pointer;
+							}
+							box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.3);
+							&:disabled {
+								background-color: #bbb;
+							}
+							&:active {
+								transform: translateY(2px);
+							}
+						}
+						.danger {
+							background-color: red;
+						}
+
 						.profile {
 							display: flex;
 							align-items: center;
+							height: 40px;
 							img,
 							svg {
 								width: 40px;
@@ -187,42 +216,6 @@
 								display: flex;
 								gap: 10px;
 								padding: 0 20px;
-								button {
-									margin-right: 1rem;
-									font-size: 1rem;
-									padding: 0 20px;
-									border: none;
-									background-color: #7e60ee;
-									color: white;
-									font-weight: 500;
-									border-radius: 0.25rem;
-									&:focus {
-										outline: none;
-									}
-									&:hover {
-										cursor: pointer;
-									}
-									box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.3);
-									&:disabled {
-										background-color: #bbb;
-									}
-									&:active {
-										transform: translateY(2px);
-									}
-								}
-								.danger {
-									background-color: red;
-								}
-							}
-						}
-
-						.access-select {
-							display: flex;
-							justify-content: center;
-							align-items: center;
-
-							select {
-								height: fit-content;
 							}
 						}
 					}
