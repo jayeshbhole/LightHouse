@@ -1,6 +1,7 @@
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../assets/scss/kanban.scss";
+import { DataStore } from "../context/DataStore";
 
 const Kanban = ({ project, db }) => {
 	const [cols, setCols] = useState({ todo: [], inpro: [], done: [] });
@@ -98,10 +99,34 @@ const Kanban = ({ project, db }) => {
 };
 
 const CreateCard = ({ close }) => {
+	const { project, db, firebase } = useContext(DataStore);
+
+	const [data, setData] = useState({
+		title: "",
+		desc: "",
+		priority: "low",
+		status: "todo",
+		deadline: new Date(),
+	});
+
+	const handleSubmit = (e) => {
+		const obj = {};
+		let keys = Object.keys(project.cards);
+		let key = [];
+		keys.forEach((k) => key.push(parseInt(k)));
+		key = Math.max(...key) + 1;
+		obj["cards." + key] = {
+			...data,
+			deadline: firebase.firestore.Timestamp.fromDate(new Date(data.deadline)),
+			id: key.toString(),
+		};
+		e.preventDefault();
+		db.doc("projects/" + project.id).update(obj);
+	};
 	return (
 		<div className="createcard">
-			<form>
-				<button onClick={close} className="close">
+			<form onSubmit={handleSubmit}>
+				<button onClick={close} className="close" type="reset">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						width="24"
@@ -113,30 +138,49 @@ const CreateCard = ({ close }) => {
 				<div className="content">
 					<h4>Create New Card</h4>
 					<div className="title">
-						<label htmlFor="name">Title</label>
+						<label htmlFor="title">Title</label>
 						<input
 							type="text"
-							name="name"
-							id="name"
+							name="title"
+							id="title"
 							placeholder="Task"
 							required
+							onChange={(e) => setData({ ...data, title: e.target.value })}
 						/>
 					</div>
 					<div className="desc">
-						<label htmlFor="description">Description</label>
-						<textarea name="description" id="description" rows="3"></textarea>
+						<label htmlFor="desc">Description</label>
+						<textarea
+							name="descn"
+							id="desc"
+							rows="3"
+							onChange={(e) =>
+								setData({ ...data, desc: e.target.value })
+							}></textarea>
 					</div>
 					<div className="priority">
 						<label htmlFor="priority-type">Priority</label>
-						<select name="priority-type" id="priority-type">
-							<option value="1">Low</option>
-							<option value="2">High</option>
-							<option value="3">Medium</option>
+						<select
+							name="priority-type"
+							id="priority-type"
+							onChange={(e) => setData({ ...data, priority: e.target.value })}>
+							<option value="low">Low</option>
+							<option value="medium">Medium</option>
+							<option value="high">High</option>
 						</select>
 					</div>
 					<div className="deadline">
 						<label htmlFor="date">Deadline</label>
-						<input type="date" />
+						<input
+							type="date"
+							name="date"
+							id="date"
+							defaultValue={new Date().toISOString().substr(0, 10)}
+							onChange={(e) => {
+								setData({ ...data, deadline: e.target.valueAsDate });
+								console.log(e.target.valueAsDate);
+							}}
+						/>
 					</div>
 					<div className="btnholder">
 						<button name="submit" type="submit">
