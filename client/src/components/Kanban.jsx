@@ -113,14 +113,14 @@ const CreateCard = ({ close }) => {
 					</svg>
 				</button>
 				<div className="content">
-					<h4>Create New Project</h4>
+					<h4>Create New Card</h4>
 					<div className="title">
 						<label htmlFor="name">Title</label>
 						<input
 							type="text"
 							name="name"
 							id="name"
-							placeholder="Title of the Project"
+							placeholder="Task"
 							required
 						/>
 					</div>
