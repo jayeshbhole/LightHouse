@@ -134,8 +134,8 @@ const Navbar = () => {
 									<a href="/" onClick={logout}>
 										Sign Out
 									</a>
-									<a>Your Profile</a>
-									<a>Settings</a>
+									<a href="/">Your Profile</a>
+									<a href="/">Settings</a>
 								</div>
 							</span>
 						</>

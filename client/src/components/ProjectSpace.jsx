@@ -131,7 +131,7 @@ const OptionMenu = ({ project }) => {
 		description: description,
 	});
 	const [invite, setInvite] = useState(false);
-	const isowner = project.owner == userData.email;
+	const isowner = project.owner === userData.email;
 
 	const handleSave = (e) => {
 		e.preventDefault();
@@ -216,7 +216,8 @@ const Collaborator = ({ user, project, isowner }) => {
 				<span>({user.status})</span>
 			</div>
 			<div className="status">
-				{user.status != "owner" && (isowner || user.email == userData.email) ? (
+				{user.status !== "owner" &&
+				(isowner || user.email === userData.email) ? (
 					<button className="danger" onClick={handledelete}>
 						<i className="gg-close"></i>
 					</button>
