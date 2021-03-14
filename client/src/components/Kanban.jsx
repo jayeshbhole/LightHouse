@@ -86,11 +86,9 @@ const Kanban = ({ project, db }) => {
 						</Droppable>
 					);
 				})}
-				<div className="add-card" onClick = {() => settoggle(true)}>
-					<div >
-						<i className="gg-add-r">
-							
-						</i>
+				<div className="add-card" onClick={() => settoggle(true)}>
+					<div>
+						<i className="gg-add-r"></i>
 					</div>
 				</div>
 				{toggle ? <CreateCard close={() => settoggle(false)} /> : null}
@@ -131,14 +129,14 @@ const CreateCard = ({ close }) => {
 					<div className="priority">
 						<label htmlFor="priority-type">Priority</label>
 						<select name="priority-type" id="priority-type">
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
+							<option value="1">Low</option>
+							<option value="2">High</option>
+							<option value="3">Medium</option>
 						</select>
 					</div>
 					<div className="deadline">
 						<label htmlFor="date">Deadline</label>
-						<input type="date"/>
+						<input type="date" />
 					</div>
 					<div className="btnholder">
 						<button name="submit" type="submit">

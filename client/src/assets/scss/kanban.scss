@@ -108,7 +108,7 @@
 		right: 1.5rem;
 		background: #fff;
 		border: 0;
-		padding: 0 10px 0 10px;
+		padding: 0 10px;
 		svg {
 			fill: #ff6584;
 		}
@@ -120,79 +120,30 @@
 		}
 	}
 	.content {
-		padding: auto;
 		h4 {
 			text-align: center;
 			font-size: 1.5rem;
 			color: #7e60ee;
 		}
-		.title {
+		div {
 			width: 90%;
+			margin: auto;
 			padding: 1rem;
 			background-color: #fff;
 			border-radius: 0.5rem;
 			label {
+				display: block;
 				padding-bottom: 0.5rem;
 				font-size: 1rem;
 				color: #6e6e6e;
 			}
-			input {
-				width: 95%;
+			input,textarea,select {
+				width: 100%;
 				padding: 0.5rem;
 				border: none;
 				border-radius: 0.25rem;
 				background-color: #f0f0f0;
-			}
-		}
-		.desc {
-			width: 90%;
-			padding: 1rem;
-			background-color: #fff;
-			border-radius: 0.5rem;
-			label {
-				font-size: 1rem;
-				color: #6e6e6e;
-			}
-			textarea {
-				width: 95%;
-				padding: 0.5rem;
-				border: none;
-				border-radius: 0.25rem;
-				background-color: #f0f0f0;
-			}
-		}
-		.priority {
-			width: 90%;
-			padding: 1rem;
-			background-color: #fff;
-			border-radius: 0.5rem;
-			label {
-				font-size: 1rem;
-				color: #6e6e6e;
-			}
-			select {
-				width: 95%;
-				padding: 0.5rem;
-				border: none;
-				border-radius: 0.25rem;
-				background-color: #f0f0f0;
-			}
-		}
-		.deadline {
-			width: 90%;
-			padding: 1rem;
-			background-color: #fff;
-			border-radius: 0.5rem;
-			label {
-				font-size: 1rem;
-				color: #6e6e6e;
-			}
-			input {
-				width: 95%;
-				padding: 0.5rem;
-				border: none;
-				border-radius: 0.25rem;
-				background-color: #f0f0f0;
+				box-sizing:content-box;
 			}
 		}
 		.btnholder {
