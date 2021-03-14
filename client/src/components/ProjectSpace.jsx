@@ -94,7 +94,7 @@ const ProjectTab = ({ project, toggle, setToggle }) => {
 									return member.name ? (
 										<li key={id}>
 											<p className="body">{member.name}</p>
-											<img src={member.photoURL} alt={member.name} />
+											<img src={member.photoURL} alt="" />
 										</li>
 									) : null;
 								})}
@@ -146,7 +146,7 @@ const OptionMenu = ({ project }) => {
 	});
 	const [invite, setInvite] = useState(false);
 
-	const isowner = project.owner == userData.email;
+	const isowner = project.owner === userData.email;
 	const history = useHistory();
 
 	const handleSave = (e) => {
@@ -245,7 +245,7 @@ const Collaborator = ({ user, project, isowner }) => {
 					<i className="gg-user"></i>
 				)}
 				<span>{user.name ? user.name : user.email}</span>
-				<span>({user.status})</span>
+				<span style={{ marginLeft: "auto" }}>({user.status})</span>
 			</div>
 			<div className="status">
 				{user.status !== "owner" &&
@@ -279,21 +279,32 @@ const NewCollaborator = ({ cancel }) => {
 	};
 	return (
 		<div className="collaborator">
-			<div className="profile">
-				<i className="gg-user-add"></i>
-				<span>
+			<div className="profile" style={{}}>
+				<form onSubmit={handleInvite}>
+					<i className="gg-user-add"></i>
+
 					<input
 						type="email"
 						name="email"
 						onChange={(e) => setEmail(e.target.value)}
+						style={{
+							margin: "0 15px",
+							border: "2px solid #7e60ed",
+							borderRadius: ".5rem",
+							fontSize: "1rem",
+						}}
+						placeholder="Email of Collaborator"
 					/>
-					<button onClick={handleInvite} disabled={email === ""}>
+					<button
+						type="submit"
+						disabled={email === ""}
+						style={{ marginRight: ".5rem" }}>
 						Invite
 					</button>
-					<button className="danger" onClick={cancel}>
+					<button className="danger" type="reset" onClick={cancel}>
 						<i className="gg-close"></i>
 					</button>
-				</span>
+				</form>
 			</div>
 		</div>
 	);

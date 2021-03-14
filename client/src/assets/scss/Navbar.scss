@@ -118,7 +118,7 @@ nav {
 					}
 
 					.notification {
-						padding: 10px;
+						padding: 1rem;
 						.notif-actions {
 							button {
 								margin: 5px;
@@ -127,8 +127,7 @@ nav {
 					}
 				}
 				.n-box {
-					width: 250px !important;
-					
+					width: 300px !important;
 					button {
 						font-size: 1rem;
 						padding: 0 20px;
@@ -151,17 +150,16 @@ nav {
 							transform: translateY(2px);
 						}
 					}
-					.accept{
+					.accept {
 						background-color: #19c419;
 					}
-					.reject{
+					.reject {
 						background-color: red;
 					}
 				}
 				&:hover .dropdown-box {
 					display: block;
-
-					&>*:hover {
+					& > *:hover {
 						background-color: #f5f5f5;
 					}
 				}
