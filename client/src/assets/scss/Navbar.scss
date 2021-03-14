@@ -3,12 +3,13 @@ nav {
 	top: 0;
 	left: 0;
 	width: 100%;
-	$text: rgb(129, 129, 129);
+	$text: #7780b1;
 	background-color: rgb(255, 255, 255);
 	$dec: blue;
 	color: $text;
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.123);
 	height: 60px;
+	z-index: 999;
 
 	.navbar {
 		display: flex;
@@ -22,6 +23,7 @@ nav {
 			text-decoration: none;
 			display: flex;
 			align-items: center;
+			height: 100%;
 		}
 		.start,
 		.end {
@@ -48,12 +50,16 @@ nav {
 				height: 3rem !important;
 				padding-right: 0.5rem;
 			}
-			&:not(.brand):not(.profile):not(.bell) .active {
+			&:not(.brand):not(.profile):not(.bell):not(.project-title) .active {
 				font-weight: 600;
-				color: #6c58b4;
+				color: #182661;
+			}
+			&.project-title a {
+				font-weight: 500;
+				color: #7e60ed;
 			}
 
-			&:not(.brand):not(.profile):not(.bell)::after {
+			&:not(.brand):not(.profile):not(.bell) a::after {
 				position: absolute;
 				bottom: 0.5rem;
 				left: 50%;
@@ -68,7 +74,7 @@ nav {
 				transition: all 0.1s ease-in-out;
 			}
 
-			&:not(.brand):not(.profile):not(.bell):hover::after {
+			&:not(.brand):not(.profile):not(.bell):hover a::after {
 				width: 80% !important;
 				opacity: 0.9;
 			}

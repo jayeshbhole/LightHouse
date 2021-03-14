@@ -40,7 +40,7 @@ const Navbar = () => {
 					db.doc("projects" + projectId).update({
 						users: doc
 							.data()
-							.users.filter((user) => user.email != userData.email),
+							.users.filter((user) => user.email !== userData.email),
 					});
 				}
 			});
@@ -132,7 +132,11 @@ const NavSignedProject = ({ name }) => {
 	return (
 		<>
 			{/* Name of Project and Kanban/Mindmap Links */}
-			<span>{name}</span>
+			<span className="nav-item project-title">
+				<NavLink to={`/p/${projectID}`}>
+					{name} {" >"}
+				</NavLink>
+			</span>
 			<span className="nav-item">
 				<NavLink to={`/p/${projectID}/kanban`}>Kanban</NavLink>
 			</span>

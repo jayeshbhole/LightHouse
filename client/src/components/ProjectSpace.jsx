@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Route, useParams, Switch, useRouteMatch } from "react-router-dom";
 import { DataStore } from "../context/DataStore";
 import Kanban from "./Kanban";
@@ -10,22 +10,34 @@ const ProjectSpace = () => {
 	const { url } = useRouteMatch();
 	const [toggle, setToggle] = useState(false);
 
-	if (!projects) return <div>loading project</div>;
-	if (project != projects[projectID]) setProject(projects[projectID]);
-	if (!project) return <div>loading project</div>;
+	useEffect(() => {
+		if (projects && project !== projects[projectID])
+			setProject(projects[projectID]);
+	}, [projects]);
+
 	return (
 		<Switch>
 			<Route
 				exact
 				path={`${url}/kanban`}
-				component={() => <Kanban project={project} />}
+				component={() =>
+					project ? <Kanban project={project} /> : "Loading Project!"
+				}
 			/>
 			<Route
 				exact
 				path=""
-				component={() => (
-					<ProjectTab project={project} toggle={toggle} setToggle={setToggle} />
-				)}
+				component={() =>
+					project ? (
+						<ProjectTab
+							project={project}
+							toggle={toggle}
+							setToggle={setToggle}
+						/>
+					) : (
+						"Loading Project!"
+					)
+				}
 			/>
 		</Switch>
 	);
@@ -82,14 +94,13 @@ const ProjectTab = ({ project, toggle, setToggle }) => {
 							<>
 								<h2 className="title">Upcoming Tasks</h2>
 								<ul>
-									{cards &&
-										Object.values(cards).map(({ title, deadline, id }) => {
-											return (
-												<li key={id}>
-													<TaskCard name={title} date={deadline} />
-												</li>
-											);
-										})}
+									{Object.values(cards)?.map(({ title, deadline }, index) => {
+										return (
+											<li key={index}>
+												<TaskCard name={title} date={deadline} />
+											</li>
+										);
+									})}
 								</ul>
 							</>
 						)}
@@ -100,11 +111,11 @@ const ProjectTab = ({ project, toggle, setToggle }) => {
 	);
 };
 
-const TaskCard = (name, date) => {
+const TaskCard = ({ title, deadline }) => {
 	return (
 		<div className="card">
-			<h5 className="title">{name}</h5>
-			<span className="date">{date}</span>
+			<h5 className="title">{title}</h5>
+			<span className="date">{deadline}</span>
 		</div>
 	);
 };
@@ -157,7 +168,9 @@ const OptionMenu = ({ project }) => {
 				<button
 					onClick={handleSave}
 					disabled={
-						data.name == name && data.description == description ? true : false
+						data.name === name && data.description === description
+							? true
+							: false
 					}>
 					Save
 				</button>
@@ -189,7 +202,7 @@ const Collaborator = ({ user, index, project }) => {
 		<div className="collaborator">
 			<div className="profile">
 				{user.photoURL ? (
-					<img src={user.photoURL} />
+					<img src={user.photoURL} alt="" />
 				) : (
 					<i className="gg-user"></i>
 				)}
@@ -228,7 +241,7 @@ const NewCollaborator = ({ cancel }) => {
 	return (
 		<div className="collaborator">
 			<div className="profile">
-				<i class="gg-user-add"></i>
+				<i className="gg-user-add"></i>
 				<span>
 					<input
 						type="email"
