@@ -16,10 +16,8 @@ const Navbar = () => {
 		firebase,
 	} = useContext(DataStore);
 
-	if (!userData) return <div>loading</div>;
-
 	const u = {
-		email: userData.email,
+		email: userData?.email,
 		status: "invited",
 	};
 
