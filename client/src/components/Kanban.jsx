@@ -23,8 +23,6 @@ const Kanban = ({ project, db }) => {
 		return `${date[2]} ${date[1]} ${date[3]}`;
 	};
 	const handleDragEnd = (result) => {
-		console.log(result);
-
 		if (result.destination === result.source || !result.destination) return;
 
 		const tempCard = {};
