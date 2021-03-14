@@ -1,5 +1,11 @@
 import { useContext, useState, useEffect } from "react";
-import { Route, useParams, Switch, useRouteMatch } from "react-router-dom";
+import {
+	Route,
+	useParams,
+	Switch,
+	useRouteMatch,
+	useHistory,
+} from "react-router-dom";
 import { DataStore } from "../context/DataStore";
 import Kanban from "./Kanban";
 import "../assets/scss/projectspace.scss";
@@ -132,6 +138,7 @@ const OptionMenu = ({ project }) => {
 	});
 	const [invite, setInvite] = useState(false);
 	const isowner = project.owner == userData.email;
+	const history = useHistory();
 
 	const handleSave = (e) => {
 		e.preventDefault();
@@ -143,6 +150,7 @@ const OptionMenu = ({ project }) => {
 
 	const handledeleteproject = () => {
 		db.doc("projects/" + project.id).delete();
+		history.push("/projects");
 	};
 
 	return (
