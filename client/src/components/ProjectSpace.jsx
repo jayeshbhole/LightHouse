@@ -124,13 +124,14 @@ const UpcomingTasks = () => {};
 
 const OptionMenu = ({ project }) => {
 	const { projectID } = useParams();
-	const { db } = useContext(DataStore);
+	const { db, userData } = useContext(DataStore);
 	const { name, description, users } = project;
 	const [data, setData] = useState({
 		name: name,
 		description: description,
 	});
 	const [invite, setInvite] = useState(false);
+	const isowner = project.owner == userData.email;
 
 	const handleSave = (e) => {
 		e.preventDefault();
@@ -150,6 +151,7 @@ const OptionMenu = ({ project }) => {
 					id="rename"
 					name="name"
 					defaultValue={data.name}
+					disabled={!isowner}
 					onChange={(e) => setData({ ...data, name: e.target.value })}
 				/>
 			</div>
@@ -160,29 +162,32 @@ const OptionMenu = ({ project }) => {
 					type="text"
 					id="edit-desc"
 					name="desc"
+					disabled={!isowner}
 					defaultValue={data.description}
 					onChange={(e) => setData({ ...data, description: e.target.value })}
 					rows={3}></textarea>
 			</div>
 			<div className="btnholder">
-				<button
-					onClick={handleSave}
-					disabled={
-						data.name === name && data.description === description
-							? true
-							: false
-					}>
-					Save
-				</button>
+				{isowner ? (
+					<button
+						onClick={handleSave}
+						disabled={
+							data.name === name && data.description === description
+								? true
+								: false
+						}>
+						Save
+					</button>
+				) : null}
 			</div>
 			<div className="menu-row collaborators-option">
-				<a onClick={() => setInvite(true)}>+ Invite</a>
+				{isowner ? <a onClick={() => setInvite(true)}>+ Invite</a> : null}
 				{users?.map((user, index) => (
 					<Collaborator
 						user={user}
 						key={index}
-						index={index}
 						project={project}
+						isowner={isowner}
 					/>
 				))}
 				{invite ? <NewCollaborator cancel={() => setInvite(false)} /> : null}
@@ -191,8 +196,8 @@ const OptionMenu = ({ project }) => {
 	);
 };
 
-const Collaborator = ({ user, index, project }) => {
-	const { db, firebase } = useContext(DataStore);
+const Collaborator = ({ user, project, isowner }) => {
+	const { db, firebase, userData } = useContext(DataStore);
 	const handledelete = () => {
 		db.doc("projects/" + project.id).update({
 			users: firebase.firestore.FieldValue.arrayRemove(user),
@@ -211,7 +216,7 @@ const Collaborator = ({ user, index, project }) => {
 				<span>({user.status})</span>
 			</div>
 			<div className="status">
-				{user.status != "owner" ? (
+				{user.status != "owner" && (isowner || user.email == userData.email) ? (
 					<button className="danger" onClick={handledelete}>
 						<i className="gg-close"></i>
 					</button>
