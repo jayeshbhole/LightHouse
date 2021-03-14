@@ -164,7 +164,7 @@ const NavSignedProject = ({ name }) => {
 				<NavLink to={`/p/${projectID}/kanban`}>Kanban</NavLink>
 			</span>
 			<span className="nav-item">
-				<NavLink to={`/p/${projectID}/mindmap`}>Mind Map</NavLink>
+				<NavLink to={`/p/${projectID}/chat`}>Chat</NavLink>
 			</span>
 		</>
 	);
