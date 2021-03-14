@@ -62,20 +62,22 @@
 			flex-direction: column;
 			justify-content: flex-start;
 
-			ul li {
-				padding-right: 2rem;
-				display: flex;
-				justify-content: space-between;
+			ul {
 				list-style: none;
-				p {
-					padding: 0;
-					margin: 0;
-					color: #677097;
-				}
-				img {
-					height: 1.6rem;
-					width: 1.6rem;
-					border-radius: 50%;
+				li {
+					padding-right: 2rem;
+					display: flex;
+					justify-content: space-between;
+					p {
+						padding: 0;
+						margin: 0;
+						color: #677097;
+					}
+					img {
+						height: 1.6rem;
+						width: 1.6rem;
+						border-radius: 50%;
+					}
 				}
 			}
 			.title {
