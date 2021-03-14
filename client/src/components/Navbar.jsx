@@ -103,17 +103,21 @@ const Navbar = () => {
 								} dropdown`}>
 								<img src={NotifBell} alt="" />
 								<div className="dropdown-box">
-									<div className="notification">
-										<div className="notif-text">Hello</div>
-										<div className="notif-actions">
-											<button>
-												<i class="gg-check"></i>
-											</button>
-											<button>
-												<i class="gg-close"></i>
-											</button>
-										</div>
-									</div>
+									{notifications.map((notif) => {
+										return (
+											<div className="notification">
+												<div className="notif-text">{notif.title}</div>
+												<div className="notif-actions">
+													<button>
+														<i class="gg-check"></i>
+													</button>
+													<button>
+														<i class="gg-close"></i>
+													</button>
+												</div>
+											</div>
+										);
+									})}
 								</div>
 							</span>
 							<span className="nav-item profile dropdown">
