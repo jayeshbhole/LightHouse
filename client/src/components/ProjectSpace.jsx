@@ -1,5 +1,11 @@
 import { useContext, useState, useEffect } from "react";
-import { Route, useParams, Switch, useRouteMatch } from "react-router-dom";
+import {
+	Route,
+	useParams,
+	Switch,
+	useRouteMatch,
+	useHistory,
+} from "react-router-dom";
 import { DataStore } from "../context/DataStore";
 import Kanban from "./Kanban";
 import "../assets/scss/projectspace.scss";
@@ -131,7 +137,9 @@ const OptionMenu = ({ project }) => {
 		description: description,
 	});
 	const [invite, setInvite] = useState(false);
-	const isowner = project.owner === userData.email;
+
+	const isowner = project.owner == userData.email;
+	const history = useHistory();
 
 	const handleSave = (e) => {
 		e.preventDefault();
@@ -139,6 +147,11 @@ const OptionMenu = ({ project }) => {
 			name: data.name,
 			description: data.description,
 		});
+	};
+
+	const handledeleteproject = () => {
+		db.doc("projects/" + project.id).delete();
+		history.push("/projects");
 	};
 
 	return (
@@ -167,8 +180,8 @@ const OptionMenu = ({ project }) => {
 					onChange={(e) => setData({ ...data, description: e.target.value })}
 					rows={3}></textarea>
 			</div>
-			<div className="btnholder">
-				{isowner ? (
+			{isowner ? (
+				<div className="btnholder">
 					<button
 						onClick={handleSave}
 						disabled={
@@ -178,8 +191,8 @@ const OptionMenu = ({ project }) => {
 						}>
 						Save
 					</button>
-				) : null}
-			</div>
+				</div>
+			) : null}
 			<div className="menu-row collaborators-option">
 				{isowner ? (
 					<button onClick={() => setInvite(true)} href="">
@@ -196,6 +209,13 @@ const OptionMenu = ({ project }) => {
 				))}
 				{invite ? <NewCollaborator cancel={() => setInvite(false)} /> : null}
 			</div>
+			{isowner ? (
+				<div className="btnholder">
+					<button onClick={handledeleteproject} className="danger">
+						Delete Project
+					</button>
+				</div>
+			) : null}
 		</div>
 	);
 };
