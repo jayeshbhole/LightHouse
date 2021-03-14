@@ -1,3 +1,6 @@
+@import url("https://css.gg/close.css");
+@import url("https://css.gg/user.css");
+@import url("https://css.gg/user-add.css");
 .tab {
 	background-color: #fbfbfb;
 	display: flex;
@@ -114,11 +117,40 @@
 				.menu-row {
 					width: 100%;
 					margin: 10px;
-					input {
-						
-						min-height: 100px;
+					input,
+					textarea {
+						font-size: 1.2em;
+						padding: 5px 10px;
 						width: 100%;
+						border: 1px solid #ccc;
 						border-radius: 10px;
+						&:focus {
+							outline: none;
+						}
+					}
+				}
+				.btnholder {
+					text-align: center;
+					width: 100%;
+					button {
+						font-size: 1rem;
+						width: 5rem;
+						height: 2rem;
+						border: none;
+						background-color: #7e60ee;
+						color: white;
+						font-weight: 500;
+						border-radius: 0.25rem;
+						&:focus {
+							outline: none;
+						}
+						&:hover {
+							cursor: pointer;
+						}
+						box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.3);
+						&:disabled {
+							background-color: #bbb;
+						}
 					}
 				}
 
@@ -131,17 +163,52 @@
 				}
 
 				.collaborators-option {
-					
-
 					.collaborator {
 						width: 100%;
 						display: flex;
 						justify-content: space-between;
 						align-content: space-between;
-						
+						padding: 5px;
 
 						.profile {
-							
+							display: flex;
+							align-items: center;
+							img,
+							svg {
+								width: 40px;
+								height: 40px;
+								border-radius: 30%;
+							}
+							span {
+								display: flex;
+								gap: 10px;
+								padding: 0 20px;
+								button {
+									font-size: 1rem;
+									padding: 0 20px;
+									border: none;
+									background-color: #7e60ee;
+									color: white;
+									font-weight: 500;
+									border-radius: 0.25rem;
+									&:focus {
+										outline: none;
+									}
+									&:hover {
+										cursor: pointer;
+									}
+									box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.3);
+									&:disabled {
+										background-color: #bbb;
+									}
+									&:active {
+										transform: translateY(2px);
+									}
+								}
+								.danger {
+									background-color: red;
+								}
+							}
 						}
 
 						.access-select {
@@ -154,7 +221,6 @@
 							}
 						}
 					}
-					
 				}
 			}
 		}

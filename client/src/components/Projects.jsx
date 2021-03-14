@@ -6,7 +6,7 @@ import CreateProject from "./CreateProject";
 import { DataStore } from "../context/DataStore";
 
 const Projects = () => {
-	const { userData } = useContext(DataStore);
+	const { projects } = useContext(DataStore);
 	const [toggle, settoggle] = useState(false);
 
 	return (
@@ -24,8 +24,8 @@ const Projects = () => {
 					</div>
 				</div>
 				{toggle ? <CreateProject close={() => settoggle(false)} /> : null}
-				{userData &&
-					userData.projects.map((project, index) => {
+				{projects &&
+					Object.values(projects).map((project, index) => {
 						return <ProjectCard key={index} project={project} />;
 					})}
 			</div>

@@ -16,40 +16,21 @@ const CreateProject = ({ close }) => {
 			return;
 		}
 
-		db.collection("projects")
-			.add({
-				name: data.name,
-				description: data.description,
-				createdOn: firebase.firestore.FieldValue.serverTimestamp(),
-				cards: [],
-				users: [
-					{
-						name: userData.name,
-						email: userData.email,
-						photoURL: userData.photoURL,
-						status: "owner",
-					},
-				],
-			})
-			.then((docRef) => {
-				console.log(docRef);
-				db.doc("users/" + userData.email).update({
-					projects: firebase.firestore.FieldValue.arrayUnion({
-						name: data.name,
-						description: data.description,
-						id: docRef.id,
-						users: [
-							{
-								name: userData.name,
-								email: userData.email,
-								status: "owner",
-								photoURL: userData.photoURL,
-							},
-						],
-					}),
-				});
-			});
-
+		db.collection("projects").add({
+			name: data.name,
+			description: data.description,
+			createdOn: firebase.firestore.FieldValue.serverTimestamp(),
+			cards: {},
+			usersemail: [userData.email],
+			users: [
+				{
+					name: userData.name,
+					email: userData.email,
+					photoURL: userData.photoURL,
+					status: "owner",
+				},
+			],
+		});
 		close();
 	};
 

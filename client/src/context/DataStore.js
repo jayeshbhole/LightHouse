@@ -32,6 +32,7 @@ const DataStoreProvider = (props) => {
 
 	useEffect(() => {
 		let unsub = null;
+		let unsub1 = null;
 		let unsub2 = null;
 		if (authUser[0] && !userData) {
 			unsub = db.doc(`users/${authUser[0].email}`).onSnapshot((doc) => {
@@ -40,16 +41,22 @@ const DataStoreProvider = (props) => {
 						name: authUser[0].displayName,
 						email: authUser[0].email,
 						photoURL: authUser[0].photoURL,
-						projects: [],
 					});
 					db.doc("notifications/" + authUser[0].email).set({
 						notifications: [],
 					});
 				} else {
 					setUserData(doc.data());
-					setProjects(doc.data()?.projects);
 				}
 			});
+			unsub1 = db
+				.collection("projects")
+				.where("usersemail", "array-contains", authUser[0].email)
+				.onSnapshot((qs) => {
+					const temp = {};
+					qs.forEach((doc) => (temp[doc.id] = { ...doc.data(), id: doc.id }));
+					setProjects(temp);
+				});
 			unsub2 = db
 				.doc("notifications/" + authUser[0].email)
 				.onSnapshot((doc) => {
@@ -61,6 +68,7 @@ const DataStoreProvider = (props) => {
 		// Unsubscribe firestore listener
 		return () => {
 			unsub && unsub();
+			unsub1 && unsub1();
 			unsub2 && unsub2();
 		};
 	}, [authUser[0]]);

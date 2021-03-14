@@ -20,7 +20,7 @@ import { DataStore } from "./context/DataStore";
 
 const App = () => {
 	const {
-		authUser: [isLoggedIn, isLoading, error],
+		authUser: [isLoggedIn],
 	} = useContext(DataStore);
 	return (
 		<div className="app">

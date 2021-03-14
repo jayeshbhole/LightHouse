@@ -1,21 +1,17 @@
 import { useContext, useState } from "react";
 import { Route, useParams, Switch, useRouteMatch } from "react-router-dom";
 import { DataStore } from "../context/DataStore";
-import { useDocumentData } from "react-firebase-hooks/firestore";
 import Kanban from "./Kanban";
 import "../assets/scss/projectspace.scss";
 
 const ProjectSpace = () => {
 	const { projectID } = useParams();
-	const { userData, db } = useContext(DataStore);
+	const { projects, project, setProject } = useContext(DataStore);
 	const { url } = useRouteMatch();
 
-	const [project, projLoading, projError] = useDocumentData(
-		db.doc(`projects/${projectID}`)
-	);
-
-	const [toggle, setToggle] = useState(false);
-
+	if (!projects) return <div>loading project</div>;
+	if (project != projects[projectID]) setProject(projects[projectID]);
+	if (!project) return <div>loading project</div>;
 	return (
 		<Switch>
 			<Route
@@ -23,32 +19,20 @@ const ProjectSpace = () => {
 				path={`${url}/kanban`}
 				component={() => <Kanban project={project} />}
 			/>
-			<Route
-				exact
-				path=""
-				component={() =>
-					project ? (
-						<ProjectTab project={project} isMenu={toggle} toggler={setToggle} />
-					) : (
-						"loading project"
-					)
-				}
-			/>
+			<Route exact path="" component={() => <ProjectTab project={project} />} />
 		</Switch>
 	);
 };
 
-const ProjectTab = ({
-	project: { name, description, users, cards },
-	isMenu,
-	toggler,
-}) => {
+const ProjectTab = ({ project }) => {
+	const { name, description, users, cards } = project;
+	const [toggle, setToggle] = useState(false);
 	return (
 		<div className="page project-space">
 			<div className="tab">
 				<div className="top-bar">
 					<h1 className="title">{name}</h1>
-					<button onClick={() => toggler(!isMenu)}>
+					<button onClick={() => setToggle(!toggle)}>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="30"
@@ -74,31 +58,33 @@ const ProjectTab = ({
 						<div className="team">
 							<h4 className="title">Team Members</h4>
 							<ul>
-								{users.map((member, id) => {
-									return (
-										<li key={id}>
-											<p className="body">{member.name}</p>
-											<img src={member.photoURL} alt="" />
-										</li>
-									);
-								})}
+								{users &&
+									Object.values(users).map((member, id) => {
+										return (
+											<li key={id}>
+												<p className="body">{member.name}</p>
+												<img src={member.photoURL} alt={member.name} />
+											</li>
+										);
+									})}
 							</ul>
 						</div>
 					</div>
 					<div className="right-bar">
-						{isMenu ? (
-							<OptionMenu />
+						{toggle ? (
+							<OptionMenu project={project} />
 						) : (
 							<>
 								<h2 className="title">Upcoming Tasks</h2>
 								<ul>
-									{cards.map(({title, deadline, id}) => {
-										return (
-											<li key={id}>
-												<TaskCard name={title} date={deadline} />
-											</li>
-										);
-									})}
+									{cards &&
+										Object.values(cards).map(({ title, deadline, id }) => {
+											return (
+												<li key={id}>
+													<TaskCard name={title} date={deadline} />
+												</li>
+											);
+										})}
 								</ul>
 							</>
 						)}
@@ -120,54 +106,121 @@ const TaskCard = (name, date) => {
 
 const UpcomingTasks = () => {};
 
-const OptionMenu = () => {
+const OptionMenu = ({ project }) => {
+	const { projectID } = useParams();
+	const { db } = useContext(DataStore);
+	const { name, description, users } = project;
+	const [data, setData] = useState({
+		name: name,
+		description: description,
+	});
+	const [invite, setInvite] = useState(false);
+
+	const handleSave = (e) => {
+		e.preventDefault();
+		db.doc(`projects/${projectID}`).update({
+			name: data.name,
+			description: data.description,
+		});
+	};
+
 	return (
 		<div className="menu">
 			<div className="menu-row rename-option">
 				<label htmlFor="rename">Rename Project</label>
 				<br />
-				<input type="text" id="rename" name="rename" placeholder="" />
+				<input
+					type="text"
+					id="rename"
+					name="name"
+					defaultValue={data.name}
+					onChange={(e) => setData({ ...data, name: e.target.value })}
+				/>
 			</div>
 			<div className="menu-row desc-option">
 				<label htmlFor="edit-desc">Edit Description</label>
 				<br />
-				<input type="text" id="edit-desc" name="edit-desc" placeholder="" />
+				<textarea
+					type="text"
+					id="edit-desc"
+					name="desc"
+					defaultValue={data.description}
+					onChange={(e) => setData({ ...data, description: e.target.value })}
+					rows={3}></textarea>
+			</div>
+			<div className="btnholder">
+				<button
+					onClick={handleSave}
+					disabled={
+						data.name == name && data.description == description ? true : false
+					}>
+					Save
+				</button>
 			</div>
 			<div className="menu-row collaborators-option">
-				<div className="collaborator">
-					<div className="profile">
-						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
-					</div>
-					<div className="access-select">
-						<select name="access" id="access"></select>
-					</div>
-				</div>
-				<div className="collaborator">
-					<div className="profile">
-						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
-					</div>
-					<div className="access-select">
-						<select name="access" id="access"></select>
-					</div>
-				</div>
-				<div className="collaborator">
-					<div className="profile">
-						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
-					</div>
-					<div className="access-select">
-						<select name="access" id="access"></select>
-					</div>
-				</div>
-				<div className="collaborator">
-					<div className="profile">
-						<img src="https://img.icons8.com/color/48/000000/circled-user-male-skin-type-3--v2.png" />
-					</div>
-					<div className="access-select">
-						<select name="access" id="access"></select>
-					</div>
-				</div>
+				<a onClick={() => setInvite(true)}>+ Invite</a>
+				{Object.values(users)?.map((user, index) => (
+					<Collaborator user={user} key={index} index={index} />
+				))}
+				{invite ? <NewCollaborator cancel={() => setInvite(false)} /> : null}
 			</div>
 		</div>
 	);
 };
+
+const Collaborator = ({ user, cancel }) => {
+	return (
+		<div className="collaborator">
+			<div className="profile">
+				{user.photoURL ? (
+					<img src={user.photoURL} />
+				) : (
+					<i className="gg-user"></i>
+				)}
+				<span>{user.name ? user.name : user.email}</span>
+				<span>({user.status})</span>
+			</div>
+			<div className="status"></div>
+		</div>
+	);
+};
+
+const NewCollaborator = ({ cancel }) => {
+	const { firebase, db, userData, project } = useContext(DataStore);
+	const [email, setEmail] = useState();
+	const handleInvite = () => {
+		db.doc("projects/" + project.id).update({
+			users: firebase.firestore.FieldValue.arrayUnion({
+				email: email,
+				status: "invited",
+			}),
+		});
+		db.doc("notifications/" + email).update({
+			notifications: firebase.firestore.FieldValue.arrayUnion({
+				type: "invite",
+				title: `${userData.name} invited you to ${project.name}`,
+				project: project.id,
+			}),
+		});
+	};
+	return (
+		<div className="collaborator">
+			<div className="profile">
+				<i class="gg-user-add"></i>
+				<span>
+					<input
+						type="text"
+						name="email"
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+					<button onClick={handleInvite}>Invite</button>
+					<button className="danger" onClick={cancel}>
+						<i className="gg-close"></i>
+					</button>
+				</span>
+			</div>
+		</div>
+	);
+};
+
 export default ProjectSpace;
