@@ -262,7 +262,8 @@ const Collaborator = ({ user, project, isowner }) => {
 const NewCollaborator = ({ cancel }) => {
 	const { firebase, db, userData, project } = useContext(DataStore);
 	const [email, setEmail] = useState("");
-	const handleInvite = () => {
+	const handleInvite = (e) => {
+		e.preventDefault();
 		db.doc("projects/" + project.id).update({
 			users: firebase.firestore.FieldValue.arrayUnion({
 				email: email,
