@@ -9,6 +9,7 @@ import {
 import { DataStore } from "../context/DataStore";
 import Kanban from "./Kanban";
 import "../assets/scss/projectspace.scss";
+import Chat from "./chat";
 
 const ProjectSpace = () => {
 	const { projectID } = useParams();
@@ -28,6 +29,13 @@ const ProjectSpace = () => {
 				path={`${url}/kanban`}
 				component={() =>
 					project ? <Kanban project={project} db={db} /> : "Loading Project!"
+				}
+			/>
+			<Route
+				exact
+				path={`${url}/chat`}
+				component={() =>
+					project ? <Chat project={project} /> : "Loading Project!"
 				}
 			/>
 			<Route
