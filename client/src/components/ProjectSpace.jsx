@@ -8,6 +8,7 @@ const ProjectSpace = () => {
 	const { projectID } = useParams();
 	const { projects, project, setProject } = useContext(DataStore);
 	const { url } = useRouteMatch();
+	const [toggle, setToggle] = useState(false);
 
 	if (!projects) return <div>loading project</div>;
 	if (project != projects[projectID]) setProject(projects[projectID]);
@@ -19,14 +20,19 @@ const ProjectSpace = () => {
 				path={`${url}/kanban`}
 				component={() => <Kanban project={project} />}
 			/>
-			<Route exact path="" component={() => <ProjectTab project={project} />} />
+			<Route
+				exact
+				path=""
+				component={() => (
+					<ProjectTab project={project} toggle={toggle} setToggle={setToggle} />
+				)}
+			/>
 		</Switch>
 	);
 };
 
-const ProjectTab = ({ project }) => {
+const ProjectTab = ({ project, toggle, setToggle }) => {
 	const { name, description, users, cards } = project;
-	const [toggle, setToggle] = useState(false);
 	return (
 		<div className="page project-space">
 			<div className="tab">
@@ -58,15 +64,14 @@ const ProjectTab = ({ project }) => {
 						<div className="team">
 							<h4 className="title">Team Members</h4>
 							<ul>
-								{users &&
-									Object.values(users).map((member, id) => {
-										return (
-											<li key={id}>
-												<p className="body">{member.name}</p>
-												<img src={member.photoURL} alt={member.name} />
-											</li>
-										);
-									})}
+								{users?.map((member, id) => {
+									return member.name ? (
+										<li key={id}>
+											<p className="body">{member.name}</p>
+											<img src={member.photoURL} alt={member.name} />
+										</li>
+									) : null;
+								})}
 							</ul>
 						</div>
 					</div>
@@ -159,8 +164,13 @@ const OptionMenu = ({ project }) => {
 			</div>
 			<div className="menu-row collaborators-option">
 				<a onClick={() => setInvite(true)}>+ Invite</a>
-				{Object.values(users)?.map((user, index) => (
-					<Collaborator user={user} key={index} index={index} />
+				{users?.map((user, index) => (
+					<Collaborator
+						user={user}
+						key={index}
+						index={index}
+						project={project}
+					/>
 				))}
 				{invite ? <NewCollaborator cancel={() => setInvite(false)} /> : null}
 			</div>
@@ -168,7 +178,13 @@ const OptionMenu = ({ project }) => {
 	);
 };
 
-const Collaborator = ({ user, cancel }) => {
+const Collaborator = ({ user, index, project }) => {
+	const { db, firebase } = useContext(DataStore);
+	const handledelete = () => {
+		db.doc("projects/" + project.id).update({
+			users: firebase.firestore.FieldValue.arrayRemove(user),
+		});
+	};
 	return (
 		<div className="collaborator">
 			<div className="profile">
@@ -180,14 +196,20 @@ const Collaborator = ({ user, cancel }) => {
 				<span>{user.name ? user.name : user.email}</span>
 				<span>({user.status})</span>
 			</div>
-			<div className="status"></div>
+			<div className="status">
+				{user.status != "owner" ? (
+					<button className="danger" onClick={handledelete}>
+						<i className="gg-close"></i>
+					</button>
+				) : null}
+			</div>
 		</div>
 	);
 };
 
 const NewCollaborator = ({ cancel }) => {
 	const { firebase, db, userData, project } = useContext(DataStore);
-	const [email, setEmail] = useState();
+	const [email, setEmail] = useState("");
 	const handleInvite = () => {
 		db.doc("projects/" + project.id).update({
 			users: firebase.firestore.FieldValue.arrayUnion({
@@ -209,11 +231,13 @@ const NewCollaborator = ({ cancel }) => {
 				<i class="gg-user-add"></i>
 				<span>
 					<input
-						type="text"
+						type="email"
 						name="email"
 						onChange={(e) => setEmail(e.target.value)}
 					/>
-					<button onClick={handleInvite}>Invite</button>
+					<button onClick={handleInvite} disabled={email === ""}>
+						Invite
+					</button>
 					<button className="danger" onClick={cancel}>
 						<i className="gg-close"></i>
 					</button>
