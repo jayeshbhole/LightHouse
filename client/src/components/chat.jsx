@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { DataStore } from "../context/DataStore";
 import "../assets/scss/chat.scss";
 
@@ -6,6 +6,7 @@ const Chat = ({ project }) => {
 	const { userData, db, firebase } = useContext(DataStore);
 	const [msg, setMsg] = useState("");
 	const [msgs, setMsgs] = useState([]);
+	const ref = useRef();
 	const userObj = {};
 	project?.users.forEach((u) => {
 		userObj[u.email] = u.photoURL;
@@ -17,6 +18,7 @@ const Chat = ({ project }) => {
 				if (doc.exists) {
 					setMsgs(doc.data().msg);
 				}
+				ref && ref.current.scrollTo(0, ref.current.scrollHeight);
 			});
 		return () => {
 			unsub && unsub();
@@ -40,7 +42,7 @@ const Chat = ({ project }) => {
 				<div className="top-bar">
 					<h1 className="title">Team Chat</h1>
 				</div>
-				<main className="msger-chat">
+				<main className="msger-chat" ref={ref}>
 					{msgs?.map((m, index) => (
 						<Msg msg={m} key={index} userData={userData} userObj={userObj} />
 					))}
