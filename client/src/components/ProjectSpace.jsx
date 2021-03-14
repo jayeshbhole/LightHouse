@@ -141,6 +141,10 @@ const OptionMenu = ({ project }) => {
 		});
 	};
 
+	const handledeleteproject = () => {
+		db.doc("projects/" + project.id).delete();
+	};
+
 	return (
 		<div className="menu">
 			<div className="menu-row rename-option">
@@ -167,8 +171,8 @@ const OptionMenu = ({ project }) => {
 					onChange={(e) => setData({ ...data, description: e.target.value })}
 					rows={3}></textarea>
 			</div>
-			<div className="btnholder">
-				{isowner ? (
+			{isowner ? (
+				<div className="btnholder">
 					<button
 						onClick={handleSave}
 						disabled={
@@ -178,8 +182,8 @@ const OptionMenu = ({ project }) => {
 						}>
 						Save
 					</button>
-				) : null}
-			</div>
+				</div>
+			) : null}
 			<div className="menu-row collaborators-option">
 				{isowner ? <a onClick={() => setInvite(true)}>+ Invite</a> : null}
 				{users?.map((user, index) => (
@@ -192,6 +196,13 @@ const OptionMenu = ({ project }) => {
 				))}
 				{invite ? <NewCollaborator cancel={() => setInvite(false)} /> : null}
 			</div>
+			{isowner ? (
+				<div className="btnholder">
+					<button onClick={handledeleteproject} className="danger">
+						Delete Project
+					</button>
+				</div>
+			) : null}
 		</div>
 	);
 };
