@@ -16,10 +16,8 @@ const Navbar = () => {
 		firebase,
 	} = useContext(DataStore);
 
-	if (!userData) return <div>loading</div>;
-
 	const u = {
-		email: userData.email,
+		email: userData?.email,
 		status: "invited",
 	};
 
@@ -44,7 +42,6 @@ const Navbar = () => {
 		});
 		clearnotif(n);
 	};
-
 	const clearnotif = (n) => {
 		db.doc("notifications/" + userData.email).update({
 			notifications: firebase.firestore.FieldValue.arrayRemove(n),
@@ -109,7 +106,7 @@ const Navbar = () => {
 								<img src={NotifBell} alt="" />
 								<div className="n-box dropdown-box">
 									{notifications?.map((n, index) => {
-										if (n.type == "invite")
+										if (n.type === "invite")
 											return (
 												<div className="notification" key={index}>
 													<div className="notif-text">{n.title}</div>
