@@ -196,6 +196,7 @@ const Collaborator = ({ user, index, project }) => {
 	const handledelete = () => {
 		db.doc("projects/" + project.id).update({
 			users: firebase.firestore.FieldValue.arrayRemove(user),
+			usersemail: firebase.firestore.FieldValue.arrayRemove(user.email),
 		});
 	};
 	return (

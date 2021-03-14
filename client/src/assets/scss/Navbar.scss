@@ -118,17 +118,50 @@ nav {
 					}
 
 					.notification {
+						padding: 10px;
 						.notif-actions {
 							button {
-								margin: 2px;
+								margin: 5px;
 							}
 						}
+					}
+				}
+				.n-box {
+					width: 250px !important;
+					
+					button {
+						font-size: 1rem;
+						padding: 0 20px;
+						border: none;
+						min-height: 30px;
+						color: white;
+						font-weight: 500;
+						border-radius: 0.25rem;
+						&:focus {
+							outline: none;
+						}
+						&:hover {
+							cursor: pointer;
+						}
+						box-shadow: 1px 4px 8px 1px rgba(0, 0, 0, 0.3);
+						&:disabled {
+							background-color: #bbb;
+						}
+						&:active {
+							transform: translateY(2px);
+						}
+					}
+					.accept{
+						background-color: #19c419;
+					}
+					.reject{
+						background-color: red;
 					}
 				}
 				&:hover .dropdown-box {
 					display: block;
 
-					a:hover {
+					&>*:hover {
 						background-color: #f5f5f5;
 					}
 				}

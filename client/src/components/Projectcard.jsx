@@ -15,11 +15,13 @@ const ProjectCard = ({ project }) => {
 				<div className="subtitle is-6">{description}</div>
 			</div>
 			<div className="footer">
-				{users?.map(({ photoURL }, index) => (
-					<div key={index} className="footer-img">
-						<img src={photoURL} alt="" />
-					</div>
-				))}
+				{users?.map(({ photoURL }, index) =>
+					photoURL ? (
+						<div key={index} className="footer-img">
+							<img src={photoURL} alt="" />
+						</div>
+					) : null
+				)}
 			</div>
 		</div>
 	);
