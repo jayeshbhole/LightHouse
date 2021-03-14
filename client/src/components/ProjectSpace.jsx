@@ -120,7 +120,7 @@ const TaskCard = ({ title, deadline }) => {
 	);
 };
 
-const UpcomingTasks = () => {};
+// const UpcomingTasks = () => {};
 
 const OptionMenu = ({ project }) => {
 	const { projectID } = useParams();
@@ -181,7 +181,11 @@ const OptionMenu = ({ project }) => {
 				) : null}
 			</div>
 			<div className="menu-row collaborators-option">
-				{isowner ? <a onClick={() => setInvite(true)}>+ Invite</a> : null}
+				{isowner ? (
+					<button onClick={() => setInvite(true)} href="">
+						+ Invite
+					</button>
+				) : null}
 				{users?.map((user, index) => (
 					<Collaborator
 						user={user}
