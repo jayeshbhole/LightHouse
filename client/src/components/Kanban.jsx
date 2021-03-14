@@ -4,6 +4,7 @@ import "../assets/scss/kanban.scss";
 
 const Kanban = ({ project, db }) => {
 	const [cols, setCols] = useState({ todo: [], inpro: [], done: [] });
+	const [toggle, settoggle] = useState(false);
 	const placeHolders = [
 		{ key: "todo", name: "To Do" },
 		{ key: "inpro", name: "In Progress" },
@@ -85,12 +86,68 @@ const Kanban = ({ project, db }) => {
 						</Droppable>
 					);
 				})}
-				<div className="add-card">
-					<i className="gg-add-r"></i>
+				<div className="add-card" onClick = {() => settoggle(true)}>
+					<div >
+						<i className="gg-add-r">
+							
+						</i>
+					</div>
 				</div>
+				{toggle ? <CreateCard close={() => settoggle(false)} /> : null}
 			</div>
 		</DragDropContext>
 	);
 };
 
+const CreateCard = ({ close }) => {
+	return (
+		<div className="createcard">
+			<form>
+				<button onClick={close} className="close">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24">
+						<path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z" />
+					</svg>
+				</button>
+				<div className="content">
+					<h4>Create New Project</h4>
+					<div className="title">
+						<label htmlFor="name">Title</label>
+						<input
+							type="text"
+							name="name"
+							id="name"
+							placeholder="Title of the Project"
+							required
+						/>
+					</div>
+					<div className="desc">
+						<label htmlFor="description">Description</label>
+						<textarea name="description" id="description" rows="3"></textarea>
+					</div>
+					<div className="priority">
+						<label htmlFor="priority-type">Priority</label>
+						<select name="priority-type" id="priority-type">
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</div>
+					<div className="deadline">
+						<label htmlFor="date">Deadline</label>
+						<input type="date"/>
+					</div>
+					<div className="btnholder">
+						<button name="submit" type="submit">
+							Create
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	);
+};
 export default Kanban;
