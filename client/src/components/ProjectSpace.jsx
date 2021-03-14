@@ -126,7 +126,7 @@ const TaskCard = ({ title, deadline }) => {
 	);
 };
 
-const UpcomingTasks = () => {};
+// const UpcomingTasks = () => {};
 
 const OptionMenu = ({ project }) => {
 	const { projectID } = useParams();
@@ -137,6 +137,7 @@ const OptionMenu = ({ project }) => {
 		description: description,
 	});
 	const [invite, setInvite] = useState(false);
+
 	const isowner = project.owner == userData.email;
 	const history = useHistory();
 
@@ -193,7 +194,11 @@ const OptionMenu = ({ project }) => {
 				</div>
 			) : null}
 			<div className="menu-row collaborators-option">
-				{isowner ? <a onClick={() => setInvite(true)}>+ Invite</a> : null}
+				{isowner ? (
+					<button onClick={() => setInvite(true)} href="">
+						+ Invite
+					</button>
+				) : null}
 				{users?.map((user, index) => (
 					<Collaborator
 						user={user}
@@ -235,7 +240,8 @@ const Collaborator = ({ user, project, isowner }) => {
 				<span>({user.status})</span>
 			</div>
 			<div className="status">
-				{user.status != "owner" && (isowner || user.email == userData.email) ? (
+				{user.status !== "owner" &&
+				(isowner || user.email === userData.email) ? (
 					<button className="danger" onClick={handledelete}>
 						<i className="gg-close"></i>
 					</button>
