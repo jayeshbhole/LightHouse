@@ -124,6 +124,7 @@ const Navbar = () => {
 													</div>
 												</div>
 											);
+										return <></>;
 									})}
 								</div>
 							</span>
