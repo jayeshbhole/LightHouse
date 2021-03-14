@@ -47,7 +47,7 @@ const Chat = ({ project }) => {
 						<Msg msg={m} key={index} userData={userData} userObj={userObj} />
 					))}
 				</main>
-				<div className="bod">
+				<div>
 					<div className="send">
 						<form className="msger-inputarea" onSubmit={handleSubmit}>
 							<input
