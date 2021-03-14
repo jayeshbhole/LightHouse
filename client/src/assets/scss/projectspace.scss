@@ -110,23 +110,23 @@
 				width: auto;
 				height: auto;
 				display: flex;
-				padding: 48px;
+				padding: 3rem;
 
 				flex-wrap: wrap;
 
 				.menu-row {
 					width: 100%;
-					margin: 10px;
+					margin: 0.75rem;
 					input,
 					textarea {
 						font-size: 1.2em;
 						padding: 5px 10px;
 						width: 100%;
-						border: 1px solid #ccc;
 						border-radius: 10px;
 						&:focus {
 							outline: none;
 						}
+						border: none;
 					}
 				}
 				.btnholder {
