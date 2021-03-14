@@ -50,7 +50,7 @@ const Kanban = ({ project, db }) => {
 			<div className="kanban page">
 				{placeHolders.map(({ key, name }) => {
 					return (
-						<Droppable droppableId={`${key}`}>
+						<Droppable droppableId={`${key}`} key={key}>
 							{(provided) => (
 								<div
 									className="col"

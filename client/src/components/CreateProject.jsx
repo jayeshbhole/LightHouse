@@ -22,6 +22,7 @@ const CreateProject = ({ close }) => {
 			createdOn: firebase.firestore.FieldValue.serverTimestamp(),
 			cards: {},
 			usersemail: [userData.email],
+			owner: userData.email,
 			users: [
 				{
 					name: userData.name,
