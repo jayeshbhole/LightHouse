@@ -107,10 +107,10 @@ const Navbar = () => {
 										<div className="notif-text">Hello</div>
 										<div className="notif-actions">
 											<button>
-												<i class="gg-check-r"></i>
+												<i class="gg-check"></i>
 											</button>
 											<button>
-												<i class="gg-close-r"></i>
+												<i class="gg-close"></i>
 											</button>
 										</div>
 									</div>
