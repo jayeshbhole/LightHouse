@@ -1,6 +1,7 @@
 import React from "react";
 import Banner from "../assets/img/banner.svg";
 import "../assets/scss/Home.scss";
+import { Link } from "react-router-dom";
 
 const Home = () => {
 	return (
@@ -15,7 +16,9 @@ const Home = () => {
 						<br />
 						Get Things <span className="high">Done</span>.
 					</h1>
-					<button className="cta">Start Planning</button>
+					<button className="cta">
+						<Link to="/login">Start Planning</Link>
+					</button>
 				</div>
 				<div className="rhs">
 					<img src={Banner} alt="" />
