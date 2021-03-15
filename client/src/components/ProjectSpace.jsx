@@ -84,7 +84,7 @@ const ProjectTab = ({ project, toggle, setToggle }) => {
 
 						<div className="deadline">
 							<h4 className="title">Upcoming Deadline</h4>
-							<p className="body">Some deadline{/* Deadline */}</p>
+							<p className="body">15th March 2021{/* Deadline */}</p>
 						</div>
 
 						<div className="team">
