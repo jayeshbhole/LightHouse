@@ -84,7 +84,7 @@ const ProjectTab = ({ project, toggle, setToggle }) => {
 
 						<div className="deadline">
 							<h4 className="title">Upcoming Deadline</h4>
-							<p className="body">Some deadline{/* Deadline */}</p>
+							<p className="body">15th March 2021{/* Deadline */}</p>
 						</div>
 
 						<div className="team">
@@ -262,7 +262,8 @@ const Collaborator = ({ user, project, isowner }) => {
 const NewCollaborator = ({ cancel }) => {
 	const { firebase, db, userData, project } = useContext(DataStore);
 	const [email, setEmail] = useState("");
-	const handleInvite = () => {
+	const handleInvite = (e) => {
+		e.preventDefault();
 		db.doc("projects/" + project.id).update({
 			users: firebase.firestore.FieldValue.arrayUnion({
 				email: email,
