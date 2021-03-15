@@ -121,7 +121,7 @@ const CreateCard = ({ close }) => {
 	const handleSubmit = (e) => {
 		const obj = {};
 		let keys = Object.keys(project.cards);
-		let key = [];
+		let key = [0];
 		keys.forEach((k) => key.push(parseInt(k)));
 		key = Math.max(...key) + 1;
 		obj["cards." + key] = {
